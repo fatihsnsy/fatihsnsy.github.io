@@ -14,7 +14,7 @@ paginate_path: "_site/index.md"
 author:
   name: Fatih ŞENSOY # author name
   bio: >- # tell to the world
-    Reverse, malware, and love low-level things. <br>
+    I like code reversing, malware, and low-level things. <br>
     Member @karaelmascyber | Lead @zayotem | Malware Analyst @malwation
   username: fatihsnsy # general username
   github: fatihsnsy # github username
