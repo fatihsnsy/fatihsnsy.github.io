@@ -47,6 +47,9 @@ defaults:
     values:
       layout: post
       comments: true
+#disqus
+disqus:
+    shortname: fatihsensoy
 
 # Jekyll Compose default front matter
 jekyll_compose:
