@@ -3,7 +3,7 @@ title: Matrix Ransomware Analizi (Giriş Seviye)
 date: 2019-12-30 18:20 +03:00
 tags: [malware, malware analysis, matrix ransomware]
 description: Matrix Ransomware, dünyada bir çok türevi bulunan bir fidye yazılımıdır. Bizim incelediğimiz türev başka hiçbir yerde incelenmemiştir. “.eman” uzantısında dosyaları kriptolamaktadır.
-image: "/img/cover.png"
+image: "img/cover.png"
 ---
 
 Selamlar herkese. Matrix Ransomware analiz raporumu sizlere paylaşıyorum. Bu benim Malware Analistliği kariyerimde yazdığım ilk raporum ünvanını taşıyor. Diğerlerini de belirli aralıklarla sizlerle paylaşmayı düşünüyorum :)
