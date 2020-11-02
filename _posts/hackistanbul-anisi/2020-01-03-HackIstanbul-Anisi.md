@@ -3,7 +3,7 @@ title: HackIstanbul'19 Anısı
 date: 2020-01-03 00:22 +03:00
 tags: [anı, hackistanbul anısı, hackistanbul 2019]
 description: HackIstanbul'19 anımı sizler için derledim. Keyifli okumalar...
-image: "/img/cover.png"
+image: "img/cover.png"
 ---
 
 Herkese selamlar;
