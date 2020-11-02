@@ -20,7 +20,7 @@ author:
   github: fatihsnsy # github username
   twitter: fatihsnsy # twitter username
   email: iletisim@fatihsensoy.com # email adress
-  avatar: assets/img/avatar.jpg # change with your own avatar
+  avatar: /assets/img/avatar.jpg # change with your own avatar
 
 # URL settings
 url: "https://fatihsensoy.com" #
