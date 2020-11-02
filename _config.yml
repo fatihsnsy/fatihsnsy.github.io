@@ -94,3 +94,4 @@ plugins:
   - jekyll-sitemap
   - jekyll-postfiles
   - jekyll-paginate
+  - jekyll-seo-tag
