@@ -26,7 +26,7 @@ author:
 url: "https://fatihsensoy.com" #
 baseurl:
 permalink: /:title/
-google_analytics: UA-155173124-1
+google_analytics: "UA-155173124-1"
 fb_appid:
 
 # Collection setting
