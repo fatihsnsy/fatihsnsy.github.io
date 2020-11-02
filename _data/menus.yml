@@ -1,0 +1,16 @@
+- title: Anasayfa
+  url: /
+  external: false
+
+- title: Arşiv
+  url: /archive/
+  external: false
+
+- title: Hakkımda
+  url: /about/
+  external: false # set true if you using external link, see below
+
+# Example:
+# - title: github
+#   url: https://github.com/piharpi/jekyll-klise
+#   external: true

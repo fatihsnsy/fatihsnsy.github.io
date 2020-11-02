@@ -1,0 +1,93 @@
+# Site settings
+title: Fatih Şensoy # site title
+description: >- # site description
+  Bilişim-teknoloji ve siber güvenlik konuları üzerine teknik makaleler ve içerikler üreten bir siber blog...
+lang: tr-TR # default lang
+timezone: Europe/Istanbul # set your timezone
+mode: dark # default theme "dark" | "light"
+
+#Pagination
+paginate: 5
+paginate_path: "_site/index.md"
+
+# Profile settings
+author:
+  name: Fatih ŞENSOY # author name
+  bio: >- # tell to the world
+    Reverse, malware, and love low-level things. <br>
+    Member @karaelmascyber | Lead @zayotem | Malware Analyst @malwation
+  username: fatihsnsy # general username
+  github: fatihsnsy # github username
+  twitter: fatihsnsy # twitter username
+  email: iletisim@fatihsensoy.com # email adress
+  avatar: /assets/img/avatar.jpg # change with your own avatar
+
+# URL settings
+url: "https://fatihsensoy.com" #
+baseurl:
+permalink: /:title/
+google_analytics: # leave it blank if not wish
+fb_appid:
+
+# Collection setting
+collections:
+  posts:
+    output: true
+
+# Markdown settings
+markdown: kramdown
+highlighter: rouge
+kramdown:
+  syntax_highlighter: rouge
+
+# Default front matter
+defaults:
+  - scope:
+      path: ""
+    values:
+      layout: post
+      comments: true
+
+# Jekyll Compose default front matter
+jekyll_compose:
+  post_default_front_matter:
+    modified:
+    tags: []
+    description:
+  draft_default_front_matter:
+    modified:
+    tags: []
+    description:
+
+# Homepage limit posts
+number_of_posts: 5
+
+# Build settings
+# theme: klise
+sass:
+  style: compressed
+
+include:
+  - _redirects
+  - .htaccess
+
+exclude:
+  - CNAME
+  - Gemfile
+  - Gemfile.lock
+  - LICENSE
+  - CHANGELOG.md
+  - README.md
+  - node_modules
+  - CODE_OF_CONDUCT.md
+  - CONTRIBUTING.md
+  - lighthouse.png
+  - klise-*.gem
+  - klise.gemspec
+
+# Plugins
+plugins:
+  - jekyll-feed
+  - jekyll-sitemap
+  - jekyll-postfiles
+  - jekyll-paginate
