@@ -45,7 +45,7 @@ defaults:
   - scope:
       path: ""
     values:
-      layout: post
+      layout: default
       comments: true
 
 # Jekyll Compose default front matter
