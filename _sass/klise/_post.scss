@@ -6,6 +6,57 @@
   }
 }
 
+img{
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+
+}
+
+
+.main_wrapper{
+  @include media-query($on-mobile) {
+
+    .toc_wrapper{
+      display: none;
+    }
+    position: relative;
+    display: block;
+    flex-direction: unset;
+    justify-content: unset;
+  }
+
+  position: absolute;
+  display: flex;
+  justify-content: space-between;
+}
+
+.toc_wrapper{
+  position: sticky;
+  width: 50vh;
+  height: 300px;
+  top: 5%;
+  margin-left: 30px;
+  float: left;
+  display: flex;
+  flex-direction: column;
+  
+}
+
+.toc_content{
+  
+    text-align: left;
+    li::before {
+      content: "\0023";
+      display: inline-block;
+      top: -1px;
+      width: 1.2em;
+      margin-left: -1.3em;
+      font-weight: 700;
+    }
+
+}
+
 .section-nav{
     border: 3px solid white;
     padding: 20px;

@@ -142,7 +142,7 @@ ul {
     text-align: -webkit-match-parent;
   }
   li::before {
-    content: "\FE63";
+    content: "- ";
     display: inline-block;
     top: -1px;
     width: 1.2em;
@@ -274,8 +274,8 @@ blockquote {
 
 // Wrapper
 .wrapper {
-  max-width: -webkit-calc(#{$narrow-size} - (#{$spacing-full} * 2));
-  max-width: calc(#{$narrow-size} - (#{$spacing-full} * 2));
+  max-width: -webkit-calc(#{$narrow-size} - (#{$spacing-full} * 1));
+  max-width: calc(#{$narrow-size} - (#{$spacing-full} * 1));
   position: relative;
   margin-right: auto;
   margin-left: auto;

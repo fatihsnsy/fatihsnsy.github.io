@@ -52,6 +52,7 @@ defaults:
     values:
       layout: post
       comments: true
+      toc: true
 #disqus
 disqus:
     shortname: fatihsensoy
