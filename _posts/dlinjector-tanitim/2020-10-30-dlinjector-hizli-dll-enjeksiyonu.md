@@ -4,6 +4,7 @@ date: 2020-10-30 12:00 +03:00
 tags: [dlinjector, dlinjector cli, dlinjector gui, dll enjeksiyonu, dll injection, dll injection tools, process injection tool]
 description: Hızlı DLL enjeksiyon aracım DLInjector projesi sizlerle...
 image: "img/cover.jpg"
+toc: false
 ---
 
 Zararlı yazılımları analiz ederken farklı farklı “**Proces Injection**” tekniklerine denk geliyorum. Bunlardan en bariz olanı şüphesiz DLL enjeksiyonu olmakta. Tabi enjeksiyon yöntemlerini sadece zararlı uygulamalar kullanıyor diye de ötekileştirmemek lazım. Anti-virüs, EDR gibi güvenlik çözümlerinin yanı sıra birçok uygulama da Process enjeksiyon yöntemlerini kullanabilmektedir.
