@@ -11,7 +11,7 @@ paginate: 5
 paginate_path: "_site/index.md"
 # toc settings
 toc:
-  ordered_list: true
+  ordered_list: false
   list_class: toc-list-class
   sublist_class: toc-sublist-class
 
