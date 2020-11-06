@@ -95,3 +95,4 @@ plugins:
   - jekyll-postfiles
   - jekyll-paginate
   - jekyll-seo-tag
+  - jekyll-toc
