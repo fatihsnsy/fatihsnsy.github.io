@@ -40,6 +40,17 @@
   text-align: center;
 }
 
+.section-nav{
+    border: 3px solid white;
+    padding: 20px;
+    text-align: center;
+    width: 80%;
+  
+  a{
+    color: white; !important
+  }
+}
+
 // Navigation
 .menu {
   user-select: none;
