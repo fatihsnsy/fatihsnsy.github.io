@@ -9,6 +9,11 @@ mode: dark # default theme "dark" | "light"
 #Pagination
 paginate: 5
 paginate_path: "_site/index.md"
+# toc settings
+toc:
+  ordered_list: true
+  list_class: my-list-class
+  sublist_class: my-sublist-class
 
 # Profile settings
 author:
