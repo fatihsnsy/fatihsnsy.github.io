@@ -40,15 +40,15 @@
   text-align: center;
 }
 
-ul.section-nav{
+.section-nav{
     border: 3px solid white;
     padding: 20px;
     text-align: center;
     width: 80%;
-  
-  a{
-    color: white; !important
-  }
+}
+
+.section-nav a{
+  color: white; !important
 }
 
 // Navigation
