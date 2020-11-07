@@ -10,7 +10,7 @@ Zararlı uygulamalar her ne kadar ofans odaklı olsalar da, ofansif davranışla
 
 Fakat tekniğin detayları ve gerçeklemesine geçmeden önce TLS’in ne olduğunu bilmemiz, bize büyük avantaj kazandıracaktır.
 
-### TLS Nedir?
+## TLS Nedir?
 
 Açılımı **Thread Local Storage** olan TLS, processin iş parçacıklarının (**thread**) kendilerine özgü verileri bellekte depolayabildiği bir yöntemdir. Çalışma zamanında (**runtime**) iş parçacığına özgün olan veriler TlsAlloc, TlsGetvValue, TlsSetValue gibi Windows API’leri ile desteklenebilmektedir. Ayrıca bilindiği üzere bir processin tüm iş parçacıkları aynı sanal alanı paylaşmaktadır. Bir fonksiyon içerisindeki lokal bir değişken, onu çalıştıran iş parçacığına özgüdür. Fakat fonksiyon haricinde yer alan statik ve global değişkenler ise, processin tüm iş parçacıkları ile paylaşılmaktadır. TLS yapısında oluşturulan değişkenlerde ise durum biraz farklıdır. TLS yapısında iş parçacıklarının, değişkenler için kendilerine özgü olan kopyaları bulunmaktadır.  Yani TLS yapısında, değiştirilen bir değişkenin değeri sadece ilgili olan iş parçacığında değişime uğramaktadır. Diğer iş parçacıklarının kendilerine özgü kopyaları olduğundan dolayı bir değişim olmamaktadır.
 
@@ -20,7 +20,7 @@ TLS yapısı ile, processin global bir index kullanmasıyla, her iş parçacığ
 
 Yukarıdaki görselde iki iş parçacığının TLS kullanımını görmektesiniz. TLS, gdwTlsIndex1 ve gdwTlsIndex2 adında 2 adet global veri oluşturur. TlsGetValue API’si ile iş parçacıklarının ilgili indexlerinin karşılığı olan değer lpvData değişkeninde depolanır.
 
-### TLS Callback İle Debug Tespiti
+## TLS Callback İle Debug Tespiti
 
 TLS’in çalışma mantığını az da olsa makalenin konusunu anlayabilecek kadar kavradık. Şimdi ise asıl konumuza geri dönüyoruz. Eski bir gelenek olan (eski diyorum çünkü günümüzde bir çok modern debug tespit yöntemleri geliştirildi.  TLS Callback ile debug tespitinin nasıl olduğuna göz atacağız.
 
@@ -194,7 +194,7 @@ PEB ile anti-debug tekniğinin ardından küçük bir ekleme daha yaparak anti-d
 Sizlere bu makalemde TLS’in genel olarak tanımı ve yapısı, TLS Callback ile debug tespiti ve PEB yapısına değinmiş olduk. Bir sonraki makalelerimde farklı anti-debug ve anti-reverse teknikleri ile karşınızda olacağım. Sağlıcakla kalın…
 
 
-#### Kaynakça
+## Kaynakça
 
 [1]  https://en.wikipedia.org/wiki/Thread-local_storage
 

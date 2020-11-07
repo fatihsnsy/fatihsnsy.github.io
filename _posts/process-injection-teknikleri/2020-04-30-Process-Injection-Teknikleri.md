@@ -1,5 +1,4 @@
 ---
-toc: true
 title: 💉 Process Injection Teknikleri Ve Detayları
 date: 2020-04-30 22:36 +03:00
 tags: [apc dll injection, atom bombing injection, process doppelganging, process hollowing, process injection, process injection techniques, process walking, remote dll injection]
@@ -9,7 +8,7 @@ image: "img/cover.jpg"
 
 Hiç legal bir sistem uygulamasının sistem kaynaklarını gereğinden fazla tüketme ve olağan dışı ağ hareketleri gibi alışılmadık davranışlarda bulunduğunu farkettiniz mi? Forumlarda sık sık karşımıza çıkan “svchost.exe virüs müdür?” gibi sorulara işin farklı bir yüzünden en teknik detayları ile cevap veriyorum. Bir eğitim niteliğinde olan bu makalemizde sizlere Process Injection Tekniklerini olabildiğince detaylı ve açıklayıcı şekilde anlattım.
 
-#### Process Injection Nedir?
+## Process Injection Nedir?
 
 Process Injection (Code Injection diye de nitelendirilir) işleminde temel amaç, zararlı bir uygulamanın veya kodun, legal bir process’in belleğine enjekte edilmesidir. Legal process’in belleğine enjekte edilecek olan nesne, bazen bir executable, bazen bir DLL, bazen de Shellcode olabilir. Enjekte işlemi tamamlandıktan sonra ise legal process bu enjekteyi çalıştırmaya zorlanır. Process Injection saldırgana bir çok avantaj sağlamakla beraber, enjeksiyon yapan saldırgan şu işlemleri yapabilir:
 
@@ -42,7 +41,7 @@ Yukarıdaki görselde bu işlem anlaşılır bir şekilde gösterilmiştir. Malw
 
 Process Injection hakkında bir genelleme yaptık fakat bu ana başlık, farklı farklı teknikleri alt dallarında barındırmaktadır. Şimdi ise Process Injection tekniklerinin detaylarına değinecek ve en çok bilinen, etkili teknikleri açıklayacağız.
 
-### 1.   Remote DLL Injection
+## 1.   Remote DLL Injection
 Remote DLL Injection metoduna geçmeden önce DLL hakkında kısa bir bilgi vermekte fayda var. Açılımı Dynamic Linking Library olan DLL’ler bir kod/veri kütüphanesidir. Bir çok uygulamanın ortak bir şekilde kullanması için tasarlanmıştır. DLL kullanımı daha fazla performans, daha az bellek kullanımı gibi faydalar sağlamaktadır.
 
 ![Process Injection 2](img/procinj-2.png)
@@ -73,7 +72,7 @@ CreateRemoteThread API’si artık bir çok güvenlik ürünü tarafından izlen
 
 ![Process Injection 5](img/procinj-5.png)
 
-### 2. APC DLL Injection
+## 2. APC DLL Injection
 
 CreateRemoteThread() API’si ile Remote DLL Injection tekniğinin ardından şimdi ise APC DLL Injection tekniğini göreceğiz.
 
@@ -99,7 +98,7 @@ Az önce thread’in uyarılabilir(alterable) duruma geçmesinden bahsetmiştik.
 
 APC DLL Injection tekniğinde temel amaç; malware’ın hedef process’teki alterable durumda olan veya alterable duruma geçme olasılığı bulunan thread’i tanımlaması ile başlar. Daha sonra zararlı olan custom code’u QueueUserAPC() API’sini kullanarak thread’in APC kuyruğuna yerleştirir. Daha sonra ise thread, kuyruğa alınan bu zararlı custom code’un sırası geldiğinde onu çalıştırır.
 
-**Örnekleyelim**
+### Örnekleyelim
 
 Tekniği anlattık, şimdi ise kısa bir örnek verelim. Zararlı DLL’in legal iexplore.exe uygulamasını APC DLL Injection yöntemi ile enjeksiyonuna göz atacağız.
 
@@ -123,7 +122,7 @@ Görselde de görüldüğü üzere 3. Parametre, iexplore.exe process’inin pro
 
 Adrese baktığımızda ise zararlı DLL’in tam yolunu görmekteyiz.
 
-### 3. Process Hollowing
+## 3. Process Hollowing
 Başka bir kod enjeksiyon tekniklerinden birisi olan Process Hollowing, legal bir process’in belleğine zararlı executable’ın enjekte edilmesini amaç edinir.
 
 Process Hollowing tekniği, saldırgana bir çok avantaj sağlar. En önemlisi ise güvenlik ve adli analiz araçları tarafından fark edilmemesini sağlar. Örneğin legal bir process olan iexplore.exe’ye Process Hollowing tekniği olan bir malware üzerinden konuşacak olursak, process’in yolu legal process olan  iexplore.exe’nin yolunu gösterecektir. Ama iexplore.exe’nin belleğinde ise zararlı executable barınmaktadır.
@@ -174,7 +173,7 @@ Bu işlemden sonra artık suspend durumda olan process’in thread’i zararlı 
 
 Ayrıca malware, zararlı executable’ı hedef işleme enjekte etmek için VirtualAllocEx() ve WriteProcessMemory() tekniklerinden kaçınmak amacıyla **NtMapViewSection**() API’sini kullanabilmektedir. Bu API’de Process Hollowing tekniğinde kullanılan API’lerden birisidir.
 
-### 4. Process Doppelgänging
+## 4. Process Doppelgänging
 
 Popüler Code Injection tekniklerinden birisi olan Process Doppelgänging, ilk olarak 2017 yılında BlackHat’te enSilo şirketinde çalışan 2 güvenlik araştırmacısı tarafından açıklandı.
 
@@ -182,7 +181,7 @@ Process Doppelgänging Windows 10 dahil olmak üzere tüm Windows sürümlerinde
 
 Process Doppelgänging, ilk ortaya çıktığı zamanlarda bir çok AV ürünü tarafından zor tespit edildiği için malware’lar tarafından sıkça kullanılmıştır..
 
-##### Ayrım Noktası?
+### Ayrım Noktası?
 
 Process Hollowing önce hedef işlemi başlatır, daha sonra unmap işlemini yapar ve zararlı kodu enjekte eder. Process Doppelgänging ise process başlamadan önce image’ın üzerine zararlı kodu yazmaktadır. En önemli ayrım noktaları ise bu tekniktir.
 
@@ -225,7 +224,7 @@ Bu teknik tamamen gizli değildir, ve tespiti de snapshot yöntemleri kullanıla
 
 2017 yılında ortaya çıkmış bir teknik olarak günümüzdeki AV sistemlerinin bu tekniği tespit edebileceğini söyleyebiliriz.
 
-### 5. Atom Bombing Injection
+## 5. Atom Bombing Injection
 
 Process Doppelgänging kod enjeksiyon tekniğinin ardından Atom Bombing Injection tekniğine geliyoruz. Atom Bombing tekniğini, yine adını az önceki Process Doppelgänging tekniğinden de hatırlayacağınız enSilo şirketinde çalışan güvenlik araştırmacıları bulmuştur.
 
@@ -264,7 +263,7 @@ Sizlere en çok ses getiren, ilginç ve işe yarar Process Injection tekniklerin
 
 Başka bir teknik makalede görüşmek üzere…
 
-##### Yararlanılan Kaynaklar
+## Yararlanılan Kaynaklar
 
 [1] https://www.elastic.co/blog/ten-process-injection-techniques-technical-survey-common-and-trending-process
 

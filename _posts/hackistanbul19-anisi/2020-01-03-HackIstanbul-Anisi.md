@@ -4,6 +4,7 @@ date: 2020-01-03 00:22 +03:00
 tags: [anı, hackistanbul anısı, hackistanbul 2019]
 description: HackIstanbul'19 anımı sizler için derledim. Keyifli okumalar...
 image: "img/cover.png"
+toc: false
 ---
 
 Herkese selamlar;
@@ -16,7 +17,7 @@ Takım arkadaşarım Sadi, Muhammed ve Bahattin hoca ile birlikte katıldığım
 
 Yarışmaya ben çoook uzaklardan, memleketimden katılmak durumunda kaldım. Aslında bu söylediğim sadece öne eleme için geçerliydi. Yarı finalde Ankara'dan katılım sağladım.
 
-### Yarışma Başlıyor!
+## Yarışma Başlıyor!
 
 Makineler hazır, her şey yolunda, Parrot beklemedeydi :) Takımım ile uzaktan sesli iletişimi de sağlamıştık. Artık CTF'e dakikalar kalmıştı. Derken zamanı doldu, giriş bilgileri geldi ama sisteme giriş yapamıyorduk. Deniyorduk sürekli fakat olmuyordu. Sonra giriş yapmayı başardık fakat DEFAULT bir kullanıcı olarak girdik. Bazı şeyler ters gidiyordu. Sunucuya erişimde zorluklar çıkıyordu. Sebebini tahmin etmek zor değildi.
 

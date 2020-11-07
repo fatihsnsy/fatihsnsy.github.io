@@ -30,6 +30,7 @@ layout: compress
 
   {% include navbar.html %}
   
+  {% if page.toc %}
   <div class="main_wrapper">
     <div class="toc_wrapper">
       <div class="toc_content">
@@ -37,6 +38,7 @@ layout: compress
       {% toc %}
       </div> 
     </div>
+    {% endif %}
 
     <div class="wrapper post">
 
