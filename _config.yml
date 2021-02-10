@@ -29,7 +29,7 @@ author:
 
 # URL settings
 url: "https://fatihsensoy.com" #
-baseurl:
+baseurl: /
 permalink: /:title/
 google_analytics: true
 fb_appid:
@@ -101,4 +101,4 @@ plugins:
   - jekyll-postfiles
   - jekyll-paginate
   - jekyll-seo-tag
-  - jekyll-toc
+
