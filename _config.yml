@@ -102,5 +102,3 @@ plugins:
   - jekyll-paginate
   - jekyll-seo-tag
   - jekyll-toc
-
-theme: jekyll-theme-cayman
