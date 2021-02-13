@@ -3,7 +3,7 @@ title: 💉 Process Injection Teknikleri Ve Detayları
 date: 2020-04-30 22:36 +03:00
 tags: [apc dll injection, atom bombing injection, process doppelganging, process hollowing, process injection, process injection techniques, process walking, remote dll injection]
 description: Bir eğitim niteliğinde olan bu makalemizde sizlere Process Injection Tekniklerini olabildiğince detaylı ve açıklayıcı şekilde anlattım.
-image: "img/cover.jpg"
+image: "/assets/img/process-injection-teknikleri/img/cover.jpg"
 ---
 
 Hiç legal bir sistem uygulamasının sistem kaynaklarını gereğinden fazla tüketme ve olağan dışı ağ hareketleri gibi alışılmadık davranışlarda bulunduğunu farkettiniz mi? Forumlarda sık sık karşımıza çıkan “svchost.exe virüs müdür?” gibi sorulara işin farklı bir yüzünden en teknik detayları ile cevap veriyorum. Bir eğitim niteliğinde olan bu makalemizde sizlere Process Injection Tekniklerini olabildiğince detaylı ve açıklayıcı şekilde anlattım.
@@ -35,7 +35,7 @@ Process32First() ve Process32Next() API’lerinin birlikte kullanımı **Process
 
 Process Walking işlemi ile malware, enjekte edilecek process’in var olup olmadığını kontrol edebilir. Var ise enjekte olabilir, yok ise hedef process’i başlatabilir. Daha sonra ise malware nesnesi (DLL, executable, Shellcode vs.) legal process’in belleğine kendisini enjekte eder ve legal process’in enjekte olan zararlıyı çalıştırması için zorlar.
 
-![Process Injection Scheme](img/procinj-1.png)
+![Process Injection Scheme](/assets/img/process-injection-teknikleri/img/procinj-1.png)
 
 Yukarıdaki görselde bu işlem anlaşılır bir şekilde gösterilmiştir. Malware’ın user space’de çalıştığını da unutmayalım!
 
@@ -44,7 +44,7 @@ Process Injection hakkında bir genelleme yaptık fakat bu ana başlık, farklı
 ## 1.   Remote DLL Injection
 Remote DLL Injection metoduna geçmeden önce DLL hakkında kısa bir bilgi vermekte fayda var. Açılımı Dynamic Linking Library olan DLL’ler bir kod/veri kütüphanesidir. Bir çok uygulamanın ortak bir şekilde kullanması için tasarlanmıştır. DLL kullanımı daha fazla performans, daha az bellek kullanımı gibi faydalar sağlamaktadır.
 
-![Process Injection 2](img/procinj-2.png)
+![Process Injection 2](/assets/img/process-injection-teknikleri/img/procinj-2.png)
 
 Yukarıdaki görselde de görüldüğü üzere MZ ve PE headerlarına sahip olmasına rağmen bir executable’ın karakteristiğine sahip olsa da tek başına çalışamamaktadır. Kısa bir şekilde DLL’den de bahsettiğimize göre Remote DLL Injection’a geçiş yapabiliriz.
 
@@ -58,7 +58,7 @@ Daha sonra ise OpenProcess API’sini kullanarak tespit ettiği hedef process’
 
 Process’in handle’ını alan malware, daha sonra **VirtualAllocEx** API’si ile bellekte allocate (yer ayırma) işlemi uygular. Daha sonra bellekte ayırdığı lokasyona  **WriteProcessMemory** API’si ile zararlı DLL’in yolunu yazar.
 
-![Process Injection 3](img/procinj-3.png)
+![Process Injection 3](/assets/img/process-injection-teknikleri/img/procinj-3.png)
 
 Daha sonra bellekteki lokasyona yolu yazılan zararlı DLL’in thread’ler tarafından çalıştırılması gerekir. Bunun için de malware, **CreateRemoteThread**, NtCreateThreadEx, RtlCreateUserThread gibi API’leri çağırır. Ve bu API’lerin içine DLL yükleme için kullanılan LoadLibrary API’sini yerleştirir. LoadLibrary API’sinin içerisine ise zararlı DLL’in yerini yerleştirir. Bu işlemlerden sonra Remote DLL Injection’ın pseudo kodu şu şekilde olmaktadır:
 
@@ -66,11 +66,11 @@ Daha sonra bellekteki lokasyona yolu yazılan zararlı DLL’in thread’ler tar
 
 CreateRemoteThread API’si artık bir çok güvenlik ürünü tarafından izlenmektedir. Akıllı bir malware geliştiricisi bu API’yi kullanmayacaktır. Aşağıdaki görselde ise bu yöntemi kullanan Rebhip worm’una ait bir statik kod analizini görmektesiniz.
 
-![Process Injection 4](img/procinj-4.png)
+![Process Injection 4](/assets/img/process-injection-teknikleri/img/procinj-4.png)
 
 Örnek bir Remote DLL Injection sonrası amacımıza ulaşabiliyoruz:
 
-![Process Injection 5](img/procinj-5.png)
+![Process Injection 5](/assets/img/process-injection-teknikleri/img/procinj-5.png)
 
 ## 2. APC DLL Injection
 
@@ -106,7 +106,7 @@ Bu teknik, Remote DLL Injection’daki 4 adımın aynısını uygular. Yani bir 
 
 1. OpenThread() API’si ile hedef process’in thread’ine bir handle açar. Parametrelerinden birisi ise iexplore.exe process’inin thread’inin ID’sidir.
 
-![Process Injection 6](img/procinj-6.png)
+![Process Injection 6](/assets/img/process-injection-teknikleri/img/procinj-6.png)
 
 OpenThread() API’sinin dönüş değeri iexplore.exe thread’inin handle’ı olmaktadır.
 
@@ -114,11 +114,11 @@ OpenThread() API’sinin dönüş değeri iexplore.exe thread’inin handle’ı
 
 Bunun ilk parametresi malware’ın hedef thread’de yürütülmesini istediği  APC işlevinin işaretçisidir. Yani APC işlevi adresi daha önce belirlenen LoadLibrary() API’sinin kendisidir. İkinci parametresi ise hedef process’in hedef thread’inin handle’ıdır. Üçüncü parametresi ise hedef process’in memory’sinde yer alana zararlı DLL’in tam yolunu içeren adrestir. Thread execute işlemi yaptığında bu adres, LoadLibrary() API’sine parametre olarak iletilmekte ve zararlı DLL execute edilmektedir.
 
-![Process Injection 7](img/procinj-7.png)
+![Process Injection 7](/assets/img/process-injection-teknikleri/img/procinj-7.png)
 
 Görselde de görüldüğü üzere 3. Parametre, iexplore.exe process’inin process memory adresidir.
 
-![Process Injection 8](img/procinj-8.png)
+![Process Injection 8](/assets/img/process-injection-teknikleri/img/procinj-8.png)
 
 Adrese baktığımızda ise zararlı DLL’in tam yolunu görmekteyiz.
 
@@ -135,7 +135,7 @@ Aşağıdaki görselde malware tarafından suspend durumda başlatılan svchost.
 
 Daha sonra malware, PEB.ImageBaseAddress kısmına erişmek için bellekteki PEB yapısının adresini belirler. ImageBaseAddress kısmına eriştiğinde ise legal process’in memory’deki base adresini elde eder.
 
-![Process Injection 9](img/procinj-9.png)
+![Process Injection 9](/assets/img/process-injection-teknikleri/img/procinj-9.png)
 
 PEB’in tespitinden sonra malware, **GetThreadContext**() API’sini çağırır. GetThreadContext() API’si belirtilen thread’in içeriğini alır. Ve iki adet parametre alır. Bunlardan ilki thread’in handle’ıdır. İkinci parametre ise yapının CONTEXT adındaki pointer’ıdır.
 
@@ -143,29 +143,29 @@ Malware ilk parametreye suspend edilen thread’in handle’ını, ikinci parame
 
 Bu CONTEXT yapısı artık askıya alınan register durumlarını içerir. Malware daha sonra PEB yapısının işaretçisini içeren CONTEXT._EBX alanını okur. PEB adresi belirlendikten sonra ise ImageBaseAddress kısmını okuduğunu söylemiştik. Bunu yapmasının amacı da legal executable’ın base adresini belirlemekti.
 
-![Process Injection 10](img/procinj-10.png)
+![Process Injection 10](/assets/img/process-injection-teknikleri/img/procinj-10.png)
 
 Yukarıdaki görselde process belleğinin okunma işlemi görülmektedir.
 
 PEB pointer’ını tespit etmek için diğer bir yöntemin NtQueryInformationProcess API’si olduğunu söylemekte de fayda var. Hedef legal process’in base adresini belirleyen malware, legal process’in executable section’ını (çalıştırılabilir kısmını) bellekten ayırır (deallocate eder). Bunu da NtUnMapViewofSection() API’si ile gerçekleştirir.
 
-![Process Injection 11](img/procinj-11.png)
+![Process Injection 11](/assets/img/process-injection-teknikleri/img/procinj-11.png)
 
 Yukarıdaki görselde ilk parametrenin svchost.exe legal process’inin handle’ı, ikinci parametrenin ise legal process’in base adresi olduğunu görüyorsunuz. Bu işlemden sonra legal process’in executable section’ı bellekten ayrılmış, yani unmap edilmiş oluyor. Legal process’in memory’sinden boşaltılan, deallocate edilen kısımda ise RWX izinlerine sahip yeni bir kısım allocate edilir.
 
 Yeni bellek adresi önceki process ile aynı adreste veya farklı bir adreste allocate edilebilir. Yukarıdaki görselde VirtualAllocEx() API’sini memory’de **0x00400000** adresinde ayırma yapması için çağırdığı görülmektedir.
 
-![Process Injection 12](img/procinj-12.png)
+![Process Injection 12](/assets/img/process-injection-teknikleri/img/procinj-12.png)
 
 Yukarıdaki görselde 0x00400000 adresinde allocate edilen bellek alanını görmektesiniz.
 
 Bellekte istediği lokasyondan **RWX** izinlerinde yer ayırma işlemi yapan malware, **WriteProcessMemory** API()’sini kullanarak yürütülebilir dosyayı ve section’larını 0x00400000 adresindeki ayrılan konuma kopyalar. Aşağıdaki görselde bu durum görülmektedir.
 
-![Process Injection 13](img/procinj-13.png)
+![Process Injection 13](/assets/img/process-injection-teknikleri/img/procinj-13.png)
 
 Bu işlemlerden sonra malware, legal process’in PEB.ImageBaseAddress kısmına, artık zararlı içerikle dolu olan 0x00400000 adresini yazar.
 
-![Process Injection 14](img/procinj-14.png)
+![Process Injection 14](/assets/img/process-injection-teknikleri/img/procinj-14.png)
 
 Yukarıdaki görselde de artık legal process’in PEB.ImageBaseAdress kısmında yazılı olan değerin 0x01000000’den artık içinde zararlı executable’ı barındıran 0x00400000 adresinin yazılı olduğunu görüyoruz. Yani kısacası malware, suspend halde olan legal process’in start adresini, bellekte legal process’in executable kısmına enjekte edilen zararlının start adresi ile değiştiriyor.
 
@@ -216,7 +216,7 @@ Sonuç olarak, dosya içeriği geri alındıktan sonra bile process enjekte edil
 
 Özet olarak yapmamız gereken şey, zararlı içeriğin tam yolunu vermek iken rollback işleminden sonra PE içeriğine sahip bir bölümü parametre olarak alan Zw/NtCreateProcessEx() API’si vardır. Bu API’yi kullanarak dosyasız bir şekilde injection yapmış gibi oluruz ve işletim sistemi sadece dosya kapandığında değişikleri farkedeceği için bunu algılayamaz.
 
-![Process Injection 15](img/procinj-15.png)
+![Process Injection 15](/assets/img/process-injection-teknikleri/img/procinj-15.png)
 
 Yukarıdaki görselde **NtCreateProcessEx**() API’sinin yapısını görmektesiniz.
 
@@ -238,7 +238,7 @@ Atom Bombing, adını Windows’un atom tablolarından almaktadır. Atom tablola
 
 Bu açıklamadan yola çıkarak bu tekniğin arkasında yatan planı da az çok kurguluyor gibiyiz. Malware process’i legal bir string yerine zararlı kodu atom olarak oluşturuyor ve hedef olan legal process’in bu oluşturulan zararlı atom’u yükleyerek çalıştırmasını sağlıyor.
 
-![Process Injection 16](img/procinj-16.jpg)
+![Process Injection 16](/assets/img/process-injection-teknikleri/img/procinj-16.jpg)
 
 Yukarıdaki görselde Atom Bombing tekniğinin çalışma yapısı gösterilmiştir. Atom Bombing tekniğinin nasıl gerçekleştiğini anlamak için teknik olarak açıklayalım:
 

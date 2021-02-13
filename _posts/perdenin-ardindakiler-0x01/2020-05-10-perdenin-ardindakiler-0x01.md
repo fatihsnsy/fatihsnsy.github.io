@@ -3,7 +3,7 @@ title: Perdenin Ardındakiler 0x01 - Android Zararlısını Işığa Kavuşturma
 date: 2020-05-10 22:59 +03:00
 tags: [android malware, android malware analysis, android malware deobfuscation, droiddream, droidream malware analysis, malware deobfuscation]
 description: Perdenin Ardındakiler serisinin 0x01 adresinde Android zararlısını ışığa kavuşturuyoruz.
-image: "img/cover.jpg"
+image: "/assets/img/perdenin-ardindakiler-0x01/img/cover.jpg"
 ---
 
 Selamlar dostlar...
@@ -21,19 +21,19 @@ DroidDream zararlısı içerisinde birkaç farklı yapı barındırmakta. Androi
 
 Şimdi ne yapacağız? Jadx ile direk APK dosyamızı açacağız. Tebrikler, kısmen doğru cevap verdiniz. Tam doğru olanı ise Jadx’i komut satırı üzerinden `--show-bad-code` parametresi ile başlatmak. Sebebi ise Jadx’in decompile işlemi yaparken bazı metodları tam olarak ayırştırıp Java kodu olarak sunamamasından dolayı bu parametre ile başlatıyoruz ve diyoruz ki “**Sen decompile edebildiğin kadarını göster bize**”. Ve karşımıza yine de güzel bir Java metodu çıkmış oluyor. Bu işlemi yapmaz isek karşılaşacağımı tablo aşağıdaki gibi olmaktadır.
 
-![pa01-1](img/pa01-1.png)
+![pa01-1](/assets/img/perdenin-ardindakiler-0x01/img/pa01-1.png)
 
 ### Decrypt Rutinin Tespiti
 
 Giriş kısmında zararlı APK’mızı show-bad-code modunda JADX’te decompile etmiştik. Şimdi ise neyi deobfuscate edeceğimizi bulmamız gerekiyor. Bunun için en iyi yol uygulamanın çalışma hiyerarşisine göre trace etmek. Yani main sınıfından başlayıp “ne nereye gidiyor, hangi parametreleri yolluyor?” sorusunu kendinize sorup çözüm aramaya çalışırsanız karşınızda bir anda aşağıdaki görselde olduğu gibi Xor veya matematiksel işlemlerin yoğun olduğu bir kod parçası belirecektir.  
 
-![pa01-2](img/pa01-2.png)
+![pa01-2](/assets/img/perdenin-ardindakiler-0x01/img/pa01-2.png)
 
 Crypt metodunu incelediğimizde buffer adında byte tipinde bir diziyi parametre olmakta almakta. Daha sonra yaptığı işlem ise buffer dizisinin boyu kadar i değişkenini bir bir artırıp dizinin i. indisindeki değer il KEYVALUE dizisinin pos indisindeki değeri xor işlemine tabi tutmak. İç içe for döngüsü kullanılabilirdi fakat saldırgan pos değerini **pos++** işlemi ile artırmayı tercih etmiş. Hemen aşağısında bulunan if döngüsü bu konu için bizi alakadar etmemektedir. 
 
 **KEYVALUE** adındaki byte dizisi nerede diye sorarsanız saldırgan bunu her yerde tanımlamış olabilir. Ama bizim örneğimizde sınıfın en üstünde tanımlanmış durumda ve içerisinde barındırdığı değerler de ilgi çekici. 
 
-![pa01-3](img/pa01-3.png)
+![pa01-3](/assets/img/perdenin-ardindakiler-0x01/img/pa01-3.png)
 
 Bir string dizisini **getBytes**() metodu ile baytlara çevirmiş ve sonucunda da byte tipinde KEYVALUE adındaki diziye tanımlamış durumda. 
 
@@ -41,7 +41,7 @@ Bir string dizisini **getBytes**() metodu ile baytlara çevirmiş ve sonucunda d
 
 Decrypt rutinini tespit etmiştik. Ve içerisine bir bayt dizisi almakta idi. Yani çözeceği veri bir byte dizisinin içinde olmalı veyahut başka veri tipinde dizi olup, byte veri tipine zorlanmış olmalı. Uygulamayı yine çalıştırma hiyerarşisine göre analiz ettiğimizde karşımıza tam da aradığımız şekilde bir bayt dizisi çıkmakta. 
 
-![pa01-4](img/pa01-4.png)
+![pa01-4](/assets/img/perdenin-ardindakiler-0x01/img/pa01-4.png)
 
 **bArr** adındaki byte dizisini bulduk ve obfuscate edilmiş veri olduğundan şüphelendik diyelim. Peki bundan sonra ne yapacağız? Cevap basit. bArr dizisini trace etmek, yani izini sürmek. Kapsamı bArr dizisi ile daralttığımız için işimiz gerçekten de kolay oluyor. 
 
@@ -49,7 +49,7 @@ Decrypt rutinini tespit etmiştik. Ve içerisine bir bayt dizisi almakta idi. Ya
 
 Saldırgan 45 boylu bArr adındaki byte veri tipindeki diziye görselden de gördüğünüz üzere atamalar yapmış bulunmakta. Atamaların sonuna geldiğimizde ise **u = bArr; **şeklinde bir referans ataması olduğunu görüyoruz. Java’da referans atamasının karşılığını C’de pointer geçme olarak aklınızda tutabilirsiniz. Saldırgan burada izini kaybettirmeye çalışmış. Artık trace etmemiz gereken değişken udeğişkeni oluyor. Ve biraz daha analize devam ettiğimizde ise onCreate() metodunun üst kısımlarında aradığımızı görebilmekteyiz. 
 
-![pa01-5](img/pa01-5.png)
+![pa01-5](/assets/img/perdenin-ardindakiler-0x01/img/pa01-5.png)
 
 Gördüğünüz üzere obfuscate edildiğinden şüphe ettiğimiz verilerin tutulup referansının u değişkenine atandığı dizinin bir kopyasını alıp byte veri tipinde c adında başka bir diziye atamakta. Bunun hemen altında ise decrypt rutini olan crypt metoduna c’yi parametre olarak geçmekte. Bunun sonucunda ise artık obfuscate edildiğinden şüphe duyduğumuz veri çözümlenmekte. 
 
@@ -130,7 +130,7 @@ Decrypt adındaki metodumuzu yazmaya başlıyoruz.
 
 Kod parçasında görüldüğü üzere pos değişkenini hiç hesaba katmadık. Yaptığımız tek şey dizi adındaki dizi ve anahtar dizisini de karşılık gelen i. indisteki değer ile xor işlemine tabi tutmak oldu.  Dizinin içerisinde bulunan değer bayt türünde olduğundan dolayı baytları UTF8 biçimindeki stringlere, C#’ın GetString() metodu sayesinde dönüştürüp, ekrana çıktılama yaptık ve karşımıza gelen sonuç, yüz güldüren cinstendi 🙂
 
-![pa01-6](img/pa01-6.png)
+![pa01-6](/assets/img/perdenin-ardindakiler-0x01/img/pa01-6.png)
 
 Kodun tam halini buradan görebilirsiniz. Github Gist üzerinden de indirebilirsiniz. 
 

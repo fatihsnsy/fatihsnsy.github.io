@@ -3,7 +3,7 @@ title: Pratik Wireshark 🦈 Filtreleri
 date: 2020-03-25 12:05 +03:00
 tags: [wireshark filters, wireshark filtreleri, wireshark for network analysis, wireshark for infected traffic, wireshark ctf]
 description: İşinize en çok yarayacak 20 WireShark filtresini sıraladım. Keyifli okumalar...
-image: "img/cover.jpg"
+image: "/assets/img/pratik-wireshark-filteleri/img/cover.jpg"
 category: Genel
 toc: false
 ---

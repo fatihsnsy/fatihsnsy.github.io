@@ -3,7 +3,7 @@ title: HackIstanbul'19 Anısı
 date: 2020-01-03 00:22 +03:00
 tags: [anı, hackistanbul anısı, hackistanbul 2019]
 description: HackIstanbul'19 anımı sizler için derledim. Keyifli okumalar...
-image: "img/cover.png"
+image: "/assets/img/hackistanbul19-anisi/img/cover.png"
 toc: false
 ---
 
@@ -39,6 +39,6 @@ Uyandığımda yaklaşık bir kaç saattir dinlendiğimi farkettim ve bilgisayar
 
 Yarışmanın sonlarına doğru gelirken de her an yanımızda olan Muhammed Hocamıza da 12. sıralamada olduğumuzu ve biraz çaba ile ilk 10'a girebileceğimizi söylesek de yine karşımıza en büyük engel olan ZAMAN çıktı. Ne kadar tedbirli olursanız olun, etkili kullanmada sıkıntı yaşıyorsunuz. Soru sizi hiç olmayacak yerlerde döndürüp duruyor.
 
-![HackIstanbul'19 Yarışma Sonuçları](img/hackist19-1.jpg)
+![HackIstanbul'19 Yarışma Sonuçları](/assets/img/hackistanbul19-anisi/img/hackist19-1.jpg)
 
 Yarışma bitiminde ise ilk kez katıldığımız HackISTANBUL'19 CTF yarışmasını Karaelmas Siber Güvenlik Takımı olarak **12. sırada** tamamladık. Bu başarı bizi sonraki CTF'lerde daha azimli ve çalışkan hale getirdi diyebiliriz. Bu başarıyı sağlayan başta Muhammed TEMLİ hocamıza olmak üzere tüm takım arkadaşlarımıza teşekkür ediyorum. Ve HackISTANBUL'19 anısını burada sonlandırıyorum. Katıldığımız diğer CTF'lerin anılarına da eklemeye devam edeceğimi bildirir, okuyarak zamanınızı ayırdığınız için teşekkür ederim :)

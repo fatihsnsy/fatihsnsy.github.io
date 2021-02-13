@@ -3,7 +3,7 @@ title: Radare2 - Reverse Onsuz Olmaz
 date: 2020-02-04 22:49 +03:00
 tags: [radare2 kullanımı, radare2 usage, radare2 technical post, radare2 reference, radare2 command examples]
 description: Herkese selamlar arkadaşlar. Bu teknik makalemizde sizlere adını sıkça duyduğunuz Radare2'nin kısa ama faydalı, elinizin altında bir not niyetinde tutabileceğiniz bir tanıtımını yapacağım.
-image: "img/cover.jpg"
+image: "/assets/img/radare2-reverse-onsuz-olmaz/img/cover.jpg"
 ---
 
 
@@ -27,11 +27,11 @@ Radare2 hem disassembler, hem de bir debugger’dır. IDA ve Ollydbg’ın birle
 
 Rabin2, Radare2’nin bir yardımcı aracıdır. Binary’den info vermektedir. Binary’den stringler, derleme zamanı, programın yazıldığı dil gibi bir çok faydalı bilgiyi çıkarır ve bizlere daha analize başlamadan önce ön bilgi verir.
 
-![Rabin2](img/radare2-1.png)
+![Rabin2](/assets/img/radare2-reverse-onsuz-olmaz/img/radare2-1.png)
 
 Ayrıca stringleri tek tek, disassemble ettikten sonra aramak yerine Rabin2 sayesinde de ortaya dökebiliriz.
 
-![Rabin2](img/radare2-2.png)
+![Rabin2](/assets/img/radare2-reverse-onsuz-olmaz/img/radare2-2.png)
 
 `-z` parametresi bize data segmentindeki stringleri döküyor. Eğer tüm binarydeki stringleri dökmek istiyorsak `-zz `parametresini kullanmalıyız.
 
@@ -46,11 +46,11 @@ Komutumuzu verdikten sonra binary’i analiz etmemiz gerekmekte.
 bilgiyi açığa çıkarmış oluyoruz.
 `aaaa` ile de en üst seviyede analiz yapmış oluyoruz.
 
-![Radare2-3](img/radare2-3.png)
+![Radare2-3](/assets/img/radare2-reverse-onsuz-olmaz/img/radare2-3.png)
 
 Radare2 kullanırken en büyük yardımcımız tabiki de dahili de dökümanları ya da help komutları olacaktır.  `?` komutu ile tüm help dökümanlarına ulaşabilirsiniz.
 
-![Radare2-4](img/radare2-4.png)
+![Radare2-4](/assets/img/radare2-reverse-onsuz-olmaz/img/radare2-4.png)
 
 #### Seek (Sıçrama) Komutları
 
@@ -62,7 +62,7 @@ Radare2 kullanırken en büyük yardımcımız tabiki de dahili de dökümanlar�
 
 yapabiliyoruz. `s--` ve `s++` komutunun etkileri de aşağıdadır.
 
-![Radare2-5](img/radare2-5.png)
+![Radare2-5](/assets/img/radare2-reverse-onsuz-olmaz/img/radare2-5.png)
 
 #### Flagler
 
@@ -79,11 +79,11 @@ Ve bunlara da genel olarak **flag** adı verilir. Flagler analizlerde bize en ç
 
 Var olan flaglerin listesini görüntülemek için `fs` komutu kullanılır.
 
-![Radare2-6](img/radare2-6.png)
+![Radare2-6](/assets/img/radare2-reverse-onsuz-olmaz/img/radare2-6.png)
 
 Bir flagin içeriğini görüntülemek için ise `fs <flag adı>; f` komutu kullanılır.
 
-![Radare2-7](img/radare2-7.png)
+![Radare2-7](/assets/img/radare2-reverse-onsuz-olmaz/img/radare2-7.png)
 
 #### Analiz Ve Stringler
 
@@ -93,7 +93,7 @@ Bir flagin içeriğini görüntülemek için ise `fs <flag adı>; f` komutu kull
 
 Tek farkı birini programı analiz etmeden önce, diğerini ise programı analiz ederken kullanıyor olmamızdır. Genel olarak bir C programında eğer printf veya herhangi bir çıktı fonksiyonu ile ekrana bir string basılıyor ise bu, **str.** etiketi ile ilişkilendirilir ve Radare2’de bunu bu şekilde yorumlar. Bize string olduğunu bildirir. Biz sadece str. etiketine sahip tüm stringleri bastırmak istiyorsak da `axt @@ str.*` komutunu kullanabiliriz. Bu komut bize istediğimizi verecektir.
 
-![Radare2-8](img/radare2-8.jpg)
+![Radare2-8](/assets/img/radare2-reverse-onsuz-olmaz/img/radare2-8.jpg)
 
 Bu komutu kullandık ama buraya girdiğimiz komutçuklar ne işe yarıyor? `axt` komutu **‘verilen referanstaki kodu/veriyi bul**’ anlamına gelmektedir. **@@ ** işaretleri ise PHP’den de bildiğimiz foreach yineleyici fonksiyonu gibidir. Offset listesi üzerindeki bir komutu tekrar tekrar çalıştırmak için kullanılır. str. ise string bayraklarını ifade etmektedir. Tüm bu kombinasyon bize sadece kullanılan stringleri değil, aynı zamanda kullanılan isimleri ve referans verilen komutları da listeliyor.
 
@@ -101,21 +101,21 @@ Bu komutu kullandık ama buraya girdiğimiz komutçuklar ne işe yarıyor? `axt`
 
 Analiz ettiğimiz hedef programımızda import edilen fonksiyonları görüntülemek için ise `afl` komutunu kullanacağız. **Analyze Functions List** anlamına gelen bu komut bize kritik bilgiler vermektedir.
 
-![Radare2-9](img/radare2-9.png)
+![Radare2-9](/assets/img/radare2-reverse-onsuz-olmaz/img/radare2-9.png)
 
 Programın assembly kodlarını görmek için Disassemble komutunu girmemiz gerekir. Eğer bir fonksiyonun içerisindeysek `pdf` **(print disassemble functions)** komutunu girerek fonksiyonu disassemble edebiliriz. Eğer içinde bulunduğumuz adres bir fonksiyon değil ise `pd` **(printf disassemble)** komutunu girerek assembly kodlarına erişebiliriz.
 
-![Radare2-10](img/radare2-10.png)
+![Radare2-10](/assets/img/radare2-reverse-onsuz-olmaz/img/radare2-10.png)
 
 #### Registerlar
 
 Öncelikle hangi registerların olduğunu görmek için `dr` komutunu kullanıyoruz. Registerların içeriğini ekrana basmak istersek de `pxr @ <register adı>` veya `pxr @ <register adresi>` şeklinde komutlarımızı kullanabiliriz. Ayrıca bazı özel kullanımlar mevcuttur.
 
-![Radare2-11](img/radare2-11.png)
+![Radare2-11](/assets/img/radare2-reverse-onsuz-olmaz/img/radare2-11.png)
 
 `x/16x @ rip` komutu ile rip registerının ne kadarlık bir alanının gösterileceğini belirtir ve ekrana basarız. Daha fazla veri göstermek istiyorsak 16x size’ını daha da artırmalıyız.
 
-![Radare2-12](img/radare2-12.png)
+![Radare2-12](/assets/img/radare2-reverse-onsuz-olmaz/img/radare2-12.png)
 
 `dr ebx = 0x01` komutu ile istediğimiz register’ı istediğimiz değere set edebiliyoruz.
 
@@ -134,9 +134,9 @@ Farklı varyasyonları bulunmaktadır (V). Fakat bizim kullanacağımız ve en i
 
 **q** tuşu ile de Graph Mode’dan çıkış yapıp konsol moduna geri dönebilirsiniz.
 
-![Radare2-13](img/radare2-13.png)
+![Radare2-13](/assets/img/radare2-reverse-onsuz-olmaz/img/radare2-13.png)
 
-![Radare2-14](img/radare2-14.png)
+![Radare2-14](/assets/img/radare2-reverse-onsuz-olmaz/img/radare2-14.png)
 
 #### Binary Patching
 
@@ -154,7 +154,7 @@ Her zaman olduğu gibi ilk iş olarak binary’i analiz ediyoruz. `aaaa` yeterli
 
 Daha sonra ise hiçbir kaydetme işlemine gerek kalmadan **q** tuşuna basarak çıkış yapıyoruz. Ve otomatik olarak değişikliklerimiz kaydediliyor.
 
-![Radare2-15](img/radare2-15.png)
+![Radare2-15](/assets/img/radare2-reverse-onsuz-olmaz/img/radare2-15.png)
 
 #### Binary Search
 
@@ -174,7 +174,7 @@ ekrana basacaktır.
 
  `/cr` komutu, eğer var ise memory’deki** RSA Private Key**’leri bulur.
 
-![Radare2-16](img/radare2-16.png)
+![Radare2-16](/assets/img/radare2-reverse-onsuz-olmaz/img/radare2-16.png)
 
 #### Radare2 Ve Debugging
 
@@ -252,11 +252,11 @@ Radare2’nin memory kısmında da çok işlevli ve yararlı fonksiyonları bulu
 
 `dms 0x751236548625f251` belirtilen adresin öncelikle bir snapshot’ını alıyoruz. Sonra ise `dmst virus.dmp 0x00007fe665484000` komutu ile öncelikle diske kaydetmek istediğimiz dosya adını, sonra da snapshot’ını aldığımız memory map’in adresini veriyoruz. Daha sonra ise programımız ile aynı adreste virus.dmp dosyamızın oluştuğunu görüyoruz.
 
-![Radare2-17](img/radare2-17.png)
+![Radare2-17](/assets/img/radare2-reverse-onsuz-olmaz/img/radare2-17.png)
 
 VEE SON! Sizlere pratik bir şekilde kullanabileceğiniz hazır bilgileri sundum. Artık gerisi sizde...
 
-![Matrix](img/source.gif)
+![Matrix](/assets/img/radare2-reverse-onsuz-olmaz/img/source.gif)
 
 
 **Bol analiz ve rivörsler :D**

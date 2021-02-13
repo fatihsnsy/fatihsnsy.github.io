@@ -210,7 +210,7 @@ int main()
 
 Referans aldığım kod örneğini, bu tekniği yeni okuyacak olanlar için basitleştirdim. Örneğimizde kernel32.dll modülündeki CreateFileA API'sini, direk kullanım yapmadan PEB Traversal tekniği ile basitçe çağırdık. Vee sonuç: 
 
-![CreateFile Sonuç](img/sonuc.png)
+![CreateFile Sonuç](/assets/img/peb_traversal_teknigi/img/sonuc.png)
 
 Anlamadığınız bir nokta olursa yorumları debug ediyor olacağım. Sağlıklı günler dilerim...
 

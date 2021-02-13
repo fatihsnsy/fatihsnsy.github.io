@@ -3,7 +3,7 @@ title: Matrix Ransomware Analizi (Giriş Seviye)
 date: 2019-12-30 18:20 +03:00
 tags: [malware, malware analysis, matrix ransomware]
 description: Matrix Ransomware, dünyada bir çok türevi bulunan bir fidye yazılımıdır. Bizim incelediğimiz türev başka hiçbir yerde incelenmemiştir. “.eman” uzantısında dosyaları kriptolamaktadır.
-image: "img/cover.png"
+image: "/assets/img/matrix-ransomware-analizi/img/cover.png"
 ---
 
 Selamlar herkese. Matrix Ransomware analiz raporumu sizlere paylaşıyorum. Bu benim Malware Analistliği kariyerimde yazdığım ilk raporum ünvanını taşıyor. Diğerlerini de belirli aralıklarla sizlerle paylaşmayı düşünüyorum :)
@@ -20,35 +20,35 @@ Matrix Ransomware, dünyada bir çok türevi bulunan bir fidye yazılımıdır. 
 
 Öncelikle MatrixRansomware.exe isimli dosyamızı kullanıcı yetkilerinde çalıştırıyoruz.
 
-![Matrix Ransomware İlk Bakış](img/matrix-1.png)
+![Matrix Ransomware İlk Bakış](/assets/img/matrix-ransomware-analizi/img/matrix-1.png)
 
 Çalıştırdığımızda masaüstümüzde dosyalar oluştuğunu ve iki adet komut satırı ekranı açıldığını görüyoruz. Laboratuvar ortamımız ağa bağlı.
 
-![Matrix Ransomware İlk Açılış](img/matrix-2.png)
+![Matrix Ransomware İlk Açılış](/assets/img/matrix-ransomware-analizi/img/matrix-2.png)
 
 Görüldüğü üzere öne çıkan komut satırının en üstünde SHARESSCAN ibaresi yer alıyor. Yani şuan paylaşılan klasörleri geziyor. Ağımızdaki diğer bilgisayarlara ulaşmak için IP bloğumuzdan hareket ediyor. Diğer Command Line penceremizde ise bazı bilgilerin yer aldığını görüyoruz.
 
-![Matrix Ransomware İlk Tetikleme](img/matrix-3.png)
+![Matrix Ransomware İlk Tetikleme](/assets/img/matrix-ransomware-analizi/img/matrix-3.png)
 
 Integrity seviyesini numaralandırdığını görüyoruz ve şuan da 3 seviyesinde. Yani program USER yetkilerinde çalışıyor. 
 
 LDRIVES kısmına baktığımızda ise C: dizinini direk olarak hedef aldığını görüyoruz. Ve dosyalarımızı kriptolarken anlık olarak sistemimizin performansına göre kriptolama hızını gösteren bir ibare de mevcut.
 
-![Matrix Ransomware Kullanıcı Yetkilerinde Oluşturulan Dosyalar](img/matrix-4.png)
+![Matrix Ransomware Kullanıcı Yetkilerinde Oluşturulan Dosyalar](/assets/img/matrix-ransomware-analizi/img/matrix-4.png)
 
 Masaüstüne kullanıcı yetkilerinde iken oluşturduğu dosyalar görselde mevcuttur.
 
-![Matrix Ransomware elog Dosya İçeriği](img/matrix-5.png)
+![Matrix Ransomware elog Dosya İçeriği](/assets/img/matrix-ransomware-analizi/img/matrix-5.png)
 
 **elog_0940325A9D85363B.txt** dosyasını açtığımızda ise logları görüyoruz. Ransomware’ımız kullanıcı yetkilerinde olduğu için dosyalara erişememiş ve bir şifreleme yapamamış.
 
 Şimdi ise Admin yetkilerinde malware’imizi çalıştıralım.
 
-![Matrix Ransomware Admin Yetkileri](img/matrix-6.png)
+![Matrix Ransomware Admin Yetkileri](/assets/img/matrix-ransomware-analizi/img/matrix-6.png)
 
 Yine aynı işlemleri yaptı ve komut ekranı kapandı. Kapanırken ise işlemin tamamlandığına dair bir bilgi verdi. Masaüstünde yine birkaç dosya oluşturdu ama bu sefer dosyalarımızı kriptolamıştı ve **#README_EMAN#.rtf **adında bir dosya oluşturmuştu.
 
-![Matrix Ransomware Admin Yetkilerinde Oluşturulan Dosyalar](img/matrix-7.png)
+![Matrix Ransomware Admin Yetkilerinde Oluşturulan Dosyalar](/assets/img/matrix-ransomware-analizi/img/matrix-7.png)
 
 Dosyayı açtığımızda bize, dosyalarımızı nasıl kurtaracağımıza dair bir yönerge gösteriyordu. Saldırgan ile nasıl iletişime geçileceğinin bilgisi mevcuttu. Hatta güven sağlamak için saldırganlara yollayacağımız 3 adet kriptolanmış veriyi decrypt edip geri vereceklerini söylüyorlardı.
 
@@ -58,11 +58,11 @@ Dosyayı açtığımızda bize, dosyalarımızı nasıl kurtaracağımıza dair 
 
 IDA ile statik analizimizi yapıyoruz. 
 
-![IDA İlk Bakış](img/matrix-8.png)
+![IDA İlk Bakış](/assets/img/matrix-ransomware-analizi/img/matrix-8.png)
 
 Herhangi bir main fonksiyonunun olmadığını görüyoruz. Aslında var ama malware’ı geliştiren kişiler analizi zorlaştırmak için adını değiştirmiş veya malware’i packlemiş olabilirler. Pack detection toolları ile tarama yapıldığında da herhangi bir pack işleminin olmadığını gördük. Malware’ın **3700**’den fazla fonksiyonu mevcut.
 
-![Matrix Ransomware Hex Ve String](img/matrix-9.png)
+![Matrix Ransomware Hex Ve String](/assets/img/matrix-ransomware-analizi/img/matrix-9.png)
 
 Statik analize devam ettiğimizde ise Strings ve Hex Görüntüsü pencerelerine göz attığımızda ise bazı kritik bulgulara ulaşıyoruz. Bunlar indikatörlere ulaşmamızı sağlayacak.
 
@@ -75,7 +75,7 @@ Bulunan Kritik Ve Önemli Bulgular
 
 Şimdi ise bu malware’ın neleri import ettiğine bakıyoruz.
 
-![Matrix Ransomware Importlar](img/matrix-10.png)
+![Matrix Ransomware Importlar](/assets/img/matrix-ransomware-analizi/img/matrix-10.png)
 
 **Kernel32** ve **wsock32** gibi kritik kütüphaneleri kullanıyor. Wsock32 kütüphanesi import etmesinden de anlayabileceğimiz üzere bir sunucu ile iletişimde olduğu bulgularımızı doğrulamış olduk. Kütüphanelerden ise kullandığı fonksiyonlara göz atalım.
 
@@ -126,7 +126,7 @@ Ayrıca user-agent olarak “**Mozilla/4.0 (compatible; Synapse)**” ayarlıyor
 
 Daha iyi analizle yapmak için CFF Explorer’da da analiz ediyoruz.
 
-![CFF Explorer İlk Bakış](img/matrix-11.png)
+![CFF Explorer İlk Bakış](/assets/img/matrix-ransomware-analizi/img/matrix-11.png)
 
 Section Headers’lara baktığımızda standart MZ başlığı yerine **MZP** başlığını görüyoruz. Yani bu ransomware **Pascal** ile yazılmış!
 
@@ -154,7 +154,7 @@ Yukarıdaki fonksiyonlara baktığımızda;
 - Boş alana erişebildiği,
 - Ve en kritiği olan DOSYALARI SİLEBİLDİĞİ gözlemlenmiştir.
 
-![Matrix Ransomware Resource](img/matrix-12.png)
+![Matrix Ransomware Resource](/assets/img/matrix-ransomware-analizi/img/matrix-12.png)
 
 Dosyanın içindeki kaynaklarda ise iki kısmın olduğu tespit edilmiştir. Strings Tables ve RCData. Strings Tables’da ayların isimleri vs. olduğu gözlemlenmiştir. RCData kısmında ise farklı farklı kaynaklar olduğu görülmektedir.
 
@@ -164,13 +164,13 @@ Fakat erişilmeye çalışıldığında bozuk bir ASCII çıktısı bizi karşı
 
 Statik analizde bir çok önemli veriyi ele geçirmeyi başardık. Şimdi ise bize kritik bilgileri verecek olan, bir Malware Analizinin olmazsa olmazı Dinamik Analize geçiyoruz. Şimdi bulduğumuz kritik fonksiyonlara breakpoint koyuyoruz ve analiz etmeye başlıyoruz.
 
-![Matrix Ransomware x64dbg](img/matrix-13.png)
+![Matrix Ransomware x64dbg](/assets/img/matrix-ransomware-analizi/img/matrix-13.png)
 
 Hepsine breakpoint koyduk. GetVolumeInformation fonksiyonuna geldiğinde registerlarda “C:\” ifadesini görüyoruz. Yani direk olarak C dizinini hedef almış. Ama genel olarak Memory Map’e de baktığımız zaman bellekte de analizi zorlaştırmak için bir şifreleme yaptığı ortaya çıkıyor.
 
 DeleteFileW fonksiyonuna gelince ise `"C:\Program Files\Windows Mail\wabmig.exe"` dosyasına ulaştığını görüyoruz. Windows Mail’i de hedef alıyor. 
 
-![Matrix Ransomware Command Line Çıktıları](img/matrix-14.png)
+![Matrix Ransomware Command Line Çıktıları](/assets/img/matrix-ransomware-analizi/img/matrix-14.png)
 
 Bu arada masaüstünde iki tane .exe ve bir adet .bat dosyası oluşturduğunu gözlemiyoruz. “.bat” dosyasına baktığımızda ise bazı komutların yer aldığını görüyoruz. Username bilgisine ulaştığını, ve sahipliğini üzerine aldığını, ve başka dizinlere atladığını görüyoruz.
 
@@ -180,7 +180,7 @@ Yukarıda kod diziminde ise masaüstünde oluşturduğu .exe dosyasını çalı�
 
 **umsBf6bj.exe** dosyasının UPX ile packlendiğini de ortaya çıkarttık. Şimdi unpack yapıp analiz edelim.
 
-![Matrix Ransomware Gizli Dosya](img/matrix-15.png)
+![Matrix Ransomware Gizli Dosya](/assets/img/matrix-ransomware-analizi/img/matrix-15.png)
 
 Görüldüğü üzere Multiple koruma yöntemi uygulanmış. Unpack işlemimizi başarıyla gerçekleştirdik. Artık tüm fonksiyonları görebiliriz.
 

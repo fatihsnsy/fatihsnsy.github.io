@@ -3,7 +3,7 @@ title: TLS Callback ile Eski Bir Anti-Debug Tekniği
 date: 2020-08-26 12:00 +03:00
 tags: [anti-debug techniques, thread local storage, tls, tls callback, tls callback anti-debug, tls callback code snippet, tls callback ile anti-debug tekniği, tls callback implementation]
 description: Zararlı yazılımların uzun yıllardan beridir başvurdukları Anti-Debug tekniklerinden TLS Callback'e farklı bir şekilde göz atıyoruz...
-image: "img/cover.png"
+image: "/assets/img/tls-callback-eski-antidebug-teknigi/img/cover.png"
 ---
 
 Zararlı uygulamalar her ne kadar ofans odaklı olsalar da, ofansif davranışlarını daha uzun ve etkili bir şekilde sürdürmek için defansif yeteneklerini de sıklıkla ortaya koymaktadırlar. Bir kedi-fare oyunu olan bu alanda, zararlı aktörlerin  en büyük hedeflerinden birisi de yazdıkları zararlıların analiz edilmesini olabildiğince engellemeye çalışmaktır. Sizlerle birlikte adını sık sık duyduğumuz, demode olan fakat kedi-fare oyunun başlangıcı sayılabilecek bir tekniği inceleyecek ve gerçeklemesini yapacağız.
@@ -16,7 +16,7 @@ Açılımı **Thread Local Storage** olan TLS, processin iş parçacıklarının
 
 TLS yapısı ile, processin global bir index kullanmasıyla, her iş parçacığına özgü veriler sağlaması mümkündür. Aşağıdaki görsel tam olarak TLS’in nasıl çalıştığını anlatmaktadır.
 
-![TLS Callback Cover](img/cover.png) 
+![TLS Callback Cover](/assets/img/tls-callback-eski-antidebug-teknigi/img/cover.png) 
 
 Yukarıdaki görselde iki iş parçacığının TLS kullanımını görmektesiniz. TLS, gdwTlsIndex1 ve gdwTlsIndex2 adında 2 adet global veri oluşturur. TlsGetValue API’si ile iş parçacıklarının ilgili indexlerinin karşılığı olan değer lpvData değişkeninde depolanır.
 
@@ -189,7 +189,7 @@ x86 ve x64 mimari uyumlu olan implementemizde, öncelikle mimariye göre PEB yap
 
 PEB ile anti-debug tekniğinin ardından küçük bir ekleme daha yaparak anti-debug uygulamamızı biraz daha geliştiriyoruz. Windows API’larının sunduğu nimetlerden faydanalanarak, uygulamanını debug edilip edilmediğini anlayabilmekteyiz. Örnekte görüldüğü üzere **NtQueryInformationProcess** API’si ile benzer bir anti-debug tekniği kullanmış olduk. İlgili API, az önce bahsettiğimiz gibi kendisi mimariye göre PEB’in başlangıç noktasını bulur ve bizimle neredeyse aynı işlemleri yapar. **ProcessInformationClass** parametresine geçtiğimiz 7 değeri ile **DebugPort** değişkenine atama yapmaktayız. Eğer DebugPort değişkeni 0’dan farklı bir değere sahip ise programın debug edildiği anlaşılmaktadır.
 
-![TLS Callback Result](img/tls-callback-1.png) 
+![TLS Callback Result](/assets/img/tls-callback-eski-antidebug-teknigi/img/tls-callback-1.png) 
 
 Sizlere bu makalemde TLS’in genel olarak tanımı ve yapısı, TLS Callback ile debug tespiti ve PEB yapısına değinmiş olduk. Bir sonraki makalelerimde farklı anti-debug ve anti-reverse teknikleri ile karşınızda olacağım. Sağlıcakla kalın…
 
