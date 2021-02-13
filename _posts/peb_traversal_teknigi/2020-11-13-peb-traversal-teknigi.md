@@ -3,7 +3,7 @@ title: PEB Traversal Tekniği
 date: 2020-11-25 02:20 +03:00
 tags: [peb traversal, traversal techniques, process environment block traversal, dynamic api loading, dll loading]
 description: Son yıllarda ortaya çıkan evasion tekniklerinden birisi olan PEB Traversal'ı teknik ayrıntıları ile anlattığım. İyi okumalar...
-image: {{site.url}}/img/cover.jpg
+image: "img/cover.jpg"
 ---
 
 Tehdit aktörleri ve zararlı yazılım analistleri arasında mücadele ortaya çıkan yeni teknikler, araçlar ve bilgi birikimleri sayesinde her geçen gün daha da kritik bir hal alıyor. Tehdit aktörleri analistler ve güvenlik ürünlerinden kaçınmak için farklı teknikler ortaya koyuyorlar. Bu teknik makalemizde sizlere gün geçtikçe popülerleşen bir teknik olan PEB Traversal (PEB Geçişi) tekniğinin ayrıtnılarını ve küçük bir örnek ile de implementasyonunu (gerçeklemesini) göstereceğim. 
