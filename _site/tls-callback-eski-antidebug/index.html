@@ -1,0 +1,152 @@
+<!DOCTYPE html> <html lang="tr-TR"> <head prefix="og: http://ogp.me/ns#"> <meta charset="UTF-8" /> <meta http-equiv="X-UA-Compatible" content="ie=edge" /> <meta name="viewport" content="width=device-width, initial-scale=1.0" /> <meta name="mobile-web-app-capable" content="yes" /> <meta name="apple-mobile-web-app-capable" content="yes" /> <meta name="application-name" content="Fatih Şensoy" /> <meta name="apple-mobile-web-app-status-bar-style" content="#fff" /> <meta name="apple-mobile-web-app-title" content="Fatih Şensoy" /> <title> TLS Callback ile Eski Bir Anti-Debug Tekniği - Fatih Şensoy </title> <link rel="alternate" href="https://fatihsensoy.com/tls-callback-eski-antidebug/" hreflang="tr-TR" /> <link rel="canonical" href="https://fatihsensoy.com/tls-callback-eski-antidebug/" /> <meta name="description" content="Zararlı yazılımların uzun yıllardan beridir başvurdukları Anti-Debug tekniklerinden TLS Callback&#39;e farklı bir şekilde göz atıyoruz..." /> <meta name="referrer" content="no-referrer-when-downgrade" /> <meta property="fb:app_id" content="" /> <meta property="og:site_name" content="TLS Callback ile Eski Bir Anti-Debug Tekniği | " /> <meta property="og:title" content="TLS Callback ile Eski Bir Anti-Debug Tekniği | " /> <meta property="og:type" content="website" /> <meta property="og:url" content="https://fatihsensoy.com/tls-callback-eski-antidebug/" /> <meta property="og:description" content="Zararlı yazılımların uzun yıllardan beridir başvurdukları Anti-Debug tekniklerinden TLS Callback&#39;e farklı bir şekilde göz atıyoruz..." /> <meta property="og:image" content="https://fatihsensoy.com/assets/img/tls-callback-eski-antidebug-teknigi/img/cover.png" /> <meta property="og:image:width" content="640" /> <meta property="og:image:height" content="640" /> <meta name="twitter:card" content="summary" /> <meta name="twitter:title" content="TLS Callback ile Eski Bir Anti-Debug Tekniği | fatihsnsy" /> <meta name="twitter:url" content="https://fatihsensoy.com/tls-callback-eski-antidebug/" /> <meta name="twitter:site" content="@fatihsnsy" /> <meta name="twitter:creator" content="@fatihsnsy" /> <meta name="twitter:description" content="Zararlı yazılımların uzun yıllardan beridir başvurdukları Anti-Debug tekniklerinden TLS Callback&#39;e farklı bir şekilde göz atıyoruz..." /> <meta name="twitter:image" content="https://fatihsensoy.com/assets/img/tls-callback-eski-antidebug-teknigi/img/cover.png" /> <link type="application/atom+xml" rel="alternate" href="https://fatihsensoy.com/feed.xml" title="Fatih Şensoy" /> <link rel="icon" type="image/png" sizes="32x32" href="/assets/favicons/fav-32.png" /> <link rel="manifest" href="/assets/favicons/site.webmanifest" /> <meta name="apple-mobile-web-app-title" content="Jekyll Klise" /> <meta name="application-name" content="Jekyll Klise" /> <meta name="msapplication-TileColor" content="#da532c" /> <meta name="theme-color" content="#2c2c2c" /> <link rel="stylesheet" href="/assets/css/style.css" /> <!-- Begin Jekyll SEO tag v2.7.1 --> <title>TLS Callback ile Eski Bir Anti-Debug Tekniği | Fatih Şensoy</title> <meta name="generator" content="Jekyll v4.1.1" /> <meta property="og:title" content="TLS Callback ile Eski Bir Anti-Debug Tekniği" /> <meta name="author" content="Fatih ŞENSOY" /> <meta property="og:locale" content="tr_TR" /> <meta name="description" content="Zararlı yazılımların uzun yıllardan beridir başvurdukları Anti-Debug tekniklerinden TLS Callback’e farklı bir şekilde göz atıyoruz…" /> <meta property="og:description" content="Zararlı yazılımların uzun yıllardan beridir başvurdukları Anti-Debug tekniklerinden TLS Callback’e farklı bir şekilde göz atıyoruz…" /> <link rel="canonical" href="https://fatihsensoy.com/tls-callback-eski-antidebug/" /> <meta property="og:url" content="https://fatihsensoy.com/tls-callback-eski-antidebug/" /> <meta property="og:site_name" content="Fatih Şensoy" /> <meta property="og:image" content="https://fatihsensoy.com/assets/img/tls-callback-eski-antidebug-teknigi/img/cover.png" /> <meta property="og:type" content="article" /> <meta property="article:published_time" content="2020-08-26T09:00:00+00:00" /> <meta name="twitter:card" content="summary_large_image" /> <meta property="twitter:image" content="https://fatihsensoy.com/assets/img/tls-callback-eski-antidebug-teknigi/img/cover.png" /> <meta property="twitter:title" content="TLS Callback ile Eski Bir Anti-Debug Tekniği" /> <script type="application/ld+json"> {"@type":"BlogPosting","image":"https://fatihsensoy.com/assets/img/tls-callback-eski-antidebug-teknigi/img/cover.png","headline":"TLS Callback ile Eski Bir Anti-Debug Tekniği","dateModified":"2020-08-26T09:00:00+00:00","datePublished":"2020-08-26T09:00:00+00:00","url":"https://fatihsensoy.com/tls-callback-eski-antidebug/","mainEntityOfPage":{"@type":"WebPage","@id":"https://fatihsensoy.com/tls-callback-eski-antidebug/"},"author":{"@type":"Person","name":"Fatih ŞENSOY"},"description":"Zararlı yazılımların uzun yıllardan beridir başvurdukları Anti-Debug tekniklerinden TLS Callback’e farklı bir şekilde göz atıyoruz…","@context":"https://schema.org"}</script> <!-- End Jekyll SEO tag --> </head> <body data-theme="dark" class="notransition"> <script> const body = document.body; const data = body.getAttribute("data-theme"); const initTheme = (state) => { if (state === "dark") { body.setAttribute("data-theme", "dark"); } else if (state === "light") { body.removeAttribute("data-theme"); } else { localStorage.setItem("theme", data); } }; initTheme(localStorage.getItem("theme")); setTimeout(() => body.classList.remove("notransition"), 75); </script> <div class="navbar" role="navigation"> <nav class="menu"> <input type="checkbox" id="menu-trigger" class="menu-trigger" /> <label for="menu-trigger"> <span class="menu-icon"> <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 512 512" > <path d="M64,384H448V341.33H64Zm0-106.67H448V234.67H64ZM64,128v42.67H448V128Z" /> </svg> </span> </label> <a id="mode"> <svg class="mode-sunny" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 512 512" > <title>LIGHT</title> <line x1="256" y1="48" x2="256" y2="96" style="stroke-linecap:round;stroke-miterlimit:10;stroke-width:32px" /> <line x1="256" y1="416" x2="256" y2="464" style="stroke-linecap:round;stroke-miterlimit:10;stroke-width:32px" /> <line x1="403.08" y1="108.92" x2="369.14" y2="142.86" style="stroke-linecap:round;stroke-miterlimit:10;stroke-width:32px" /> <line x1="142.86" y1="369.14" x2="108.92" y2="403.08" style="stroke-linecap:round;stroke-miterlimit:10;stroke-width:32px" /> <line x1="464" y1="256" x2="416" y2="256" style="stroke-linecap:round;stroke-miterlimit:10;stroke-width:32px" /> <line x1="96" y1="256" x2="48" y2="256" style="stroke-linecap:round;stroke-miterlimit:10;stroke-width:32px" /> <line x1="403.08" y1="403.08" x2="369.14" y2="369.14" style="stroke-linecap:round;stroke-miterlimit:10;stroke-width:32px" /> <line x1="142.86" y1="142.86" x2="108.92" y2="108.92" style="stroke-linecap:round;stroke-miterlimit:10;stroke-width:32px" /> <circle cx="256" cy="256" r="80" style="stroke-linecap:round;stroke-miterlimit:10;stroke-width:32px" /> </svg> <svg class="mode-moon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 512 512" > <title>DARK</title> <line x1="256" y1="48" x2="256" y2="96" style="stroke-linecap:round;stroke-miterlimit:10;stroke-width:32px" /> <line x1="256" y1="416" x2="256" y2="464" style="stroke-linecap:round;stroke-miterlimit:10;stroke-width:32px" /> <line x1="403.08" y1="108.92" x2="369.14" y2="142.86" style="stroke-linecap:round;stroke-miterlimit:10;stroke-width:32px" /> <line x1="142.86" y1="369.14" x2="108.92" y2="403.08" style="stroke-linecap:round;stroke-miterlimit:10;stroke-width:32px" /> <line x1="464" y1="256" x2="416" y2="256" style="stroke-linecap:round;stroke-miterlimit:10;stroke-width:32px" /> <line x1="96" y1="256" x2="48" y2="256" style="stroke-linecap:round;stroke-miterlimit:10;stroke-width:32px" /> <line x1="403.08" y1="403.08" x2="369.14" y2="369.14" style="stroke-linecap:round;stroke-miterlimit:10;stroke-width:32px" /> <line x1="142.86" y1="142.86" x2="108.92" y2="108.92" style="stroke-linecap:round;stroke-miterlimit:10;stroke-width:32px" /> <circle cx="256" cy="256" r="80" style="stroke-linecap:round;stroke-miterlimit:10;stroke-width:32px" /> </svg> </a> <div class="trigger"> <div class="trigger-container"><a class="menu-link" href="/">Anasayfa</a><a class="menu-link" href="/archive/">Arşiv</a><a class="menu-link" href="/about/">Hakkımda</a><a class="menu-link rss" href="/feed.xml"> <svg xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 512 512" fill="#ED812E" > <title>RSS</title> <path d="M108.56,342.78a60.34,60.34,0,1,0,60.56,60.44A60.63,60.63,0,0,0,108.56,342.78Z" /> <path d="M48,186.67v86.55c52,0,101.94,15.39,138.67,52.11s52,86.56,52,138.67h86.66C325.33,312.44,199.67,186.67,48,186.67Z" /> <path d="M48,48v86.56c185.25,0,329.22,144.08,329.22,329.44H464C464,234.66,277.67,48,48,48Z" /> </svg> </a> </div> </div> </nav> </div> <div class="main_wrapper"> <div class="toc_wrapper"> <div class="toc_content"> <h2>İçerik</h2> <ul><li><a href="#tls-nedir">TLS Nedir?</a></li><li><a href="#tls-callback-i̇le-debug-tespiti">TLS Callback İle Debug Tespiti</a></li><li><a href="#kaynakça">Kaynakça</a></li></ul> </div> </div> <div class="wrapper post"> <main class="page-content" aria-label="Content"> <article itemscope itemtype="https://schema.org/BlogPosting"></article> <header class="header"> <img src="/assets/img/tls-callback-eski-antidebug-teknigi/img/cover.png" alt="" style="border: 2px solid white; width: 100%;"><br><br> <div class="tags"> <span itemprop="keywords"> <a class="tag" href="/tags/#anti-debug-techniques">ANTI-DEBUG TECHNIQUES</a>, <a class="tag" href="/tags/#thread-local-storage">THREAD LOCAL STORAGE</a>, <a class="tag" href="/tags/#tls">TLS</a>, <a class="tag" href="/tags/#tls-callback">TLS CALLBACK</a>, <a class="tag" href="/tags/#tls-callback-anti-debug">TLS CALLBACK ANTI-DEBUG</a>, <a class="tag" href="/tags/#tls-callback-code-snippet">TLS CALLBACK CODE SNIPPET</a>, <a class="tag" href="/tags/#tls-callback-ile-anti-debug-tekniği">TLS CALLBACK ILE ANTI-DEBUG TEKNIĞI</a>, <a class="tag" href="/tags/#tls-callback-implementation">TLS CALLBACK IMPLEMENTATION</a> </span> </div> <h1 class="header-title" itemprop="headline">TLS Callback ile Eski Bir Anti-Debug Tekniği</h1> <div class="post-meta"> <time datetime="2020-08-26T09:00:00+00:00" itemprop="datePublished"> Aug 26, 2020 </time> <span itemprop="author" itemscope itemtype="https://schema.org/Person"> <span itemprop="name">Fatih ŞENSOY</span> </span> <time hidden datetime="" itemprop="dateModified"> Aug 26, 2020 </time> <span hidden itemprop="publisher" itemtype="Person">Fatih ŞENSOY</span> <span hidden itemprop="image">/assets/img/tls-callback-eski-antidebug-teknigi/img/cover.png</span> <span hidden itemprop="mainEntityOfPage"><p>Zararlı uygulamalar her ne kadar ofans odaklı olsalar da, ofansif davranışlarını daha uzun ve etkili bir şekilde sürdürmek için defansif yeteneklerini de sıklıkla ortaya koymaktadırlar. Bir kedi-fare oyunu olan bu alanda, zararlı aktörlerin en büyük hedeflerinden birisi de yazdıkları zararlıların analiz edilmesini olabildiğince engellemeye çalışmaktır. Sizlerle birlikte adını sık sık duyduğumuz, demode olan fakat kedi-fare oyunun başlangıcı sayılabilecek bir tekniği inceleyecek ve gerçeklemesini yapacağız.</p> </span> </div> </header> <div class="page-content" itemprop="articleBody"> <p>Zararlı uygulamalar her ne kadar ofans odaklı olsalar da, ofansif davranışlarını daha uzun ve etkili bir şekilde sürdürmek için defansif yeteneklerini de sıklıkla ortaya koymaktadırlar. Bir kedi-fare oyunu olan bu alanda, zararlı aktörlerin en büyük hedeflerinden birisi de yazdıkları zararlıların analiz edilmesini olabildiğince engellemeye çalışmaktır. Sizlerle birlikte adını sık sık duyduğumuz, demode olan fakat kedi-fare oyunun başlangıcı sayılabilecek bir tekniği inceleyecek ve gerçeklemesini yapacağız.</p> <p>Fakat tekniğin detayları ve gerçeklemesine geçmeden önce TLS’in ne olduğunu bilmemiz, bize büyük avantaj kazandıracaktır.</p> <h2 id="tls-nedir"> <a href="#tls-nedir" class="anchor-head"></a> TLS Nedir? </h2> <p>Açılımı <strong>Thread Local Storage</strong> olan TLS, processin iş parçacıklarının (<strong>thread</strong>) kendilerine özgü verileri bellekte depolayabildiği bir yöntemdir. Çalışma zamanında (<strong>runtime</strong>) iş parçacığına özgün olan veriler TlsAlloc, TlsGetvValue, TlsSetValue gibi Windows API’leri ile desteklenebilmektedir. Ayrıca bilindiği üzere bir processin tüm iş parçacıkları aynı sanal alanı paylaşmaktadır. Bir fonksiyon içerisindeki lokal bir değişken, onu çalıştıran iş parçacığına özgüdür. Fakat fonksiyon haricinde yer alan statik ve global değişkenler ise, processin tüm iş parçacıkları ile paylaşılmaktadır. TLS yapısında oluşturulan değişkenlerde ise durum biraz farklıdır. TLS yapısında iş parçacıklarının, değişkenler için kendilerine özgü olan kopyaları bulunmaktadır. Yani TLS yapısında, değiştirilen bir değişkenin değeri sadece ilgili olan iş parçacığında değişime uğramaktadır. Diğer iş parçacıklarının kendilerine özgü kopyaları olduğundan dolayı bir değişim olmamaktadır.</p> <p>TLS yapısı ile, processin global bir index kullanmasıyla, her iş parçacığına özgü veriler sağlaması mümkündür. Aşağıdaki görsel tam olarak TLS’in nasıl çalıştığını anlatmaktadır.</p> <p><img src="/assets/img/tls-callback-eski-antidebug-teknigi/img/cover.png" alt="TLS Callback Cover" /></p> <p>Yukarıdaki görselde iki iş parçacığının TLS kullanımını görmektesiniz. TLS, gdwTlsIndex1 ve gdwTlsIndex2 adında 2 adet global veri oluşturur. TlsGetValue API’si ile iş parçacıklarının ilgili indexlerinin karşılığı olan değer lpvData değişkeninde depolanır.</p> <h2 id="tls-callback-i̇le-debug-tespiti"> <a href="#tls-callback-i̇le-debug-tespiti" class="anchor-head"></a> TLS Callback İle Debug Tespiti </h2> <p>TLS’in çalışma mantığını az da olsa makalenin konusunu anlayabilecek kadar kavradık. Şimdi ise asıl konumuza geri dönüyoruz. Eski bir gelenek olan (eski diyorum çünkü günümüzde bir çok modern debug tespit yöntemleri geliştirildi. TLS Callback ile debug tespitinin nasıl olduğuna göz atacağız.</p> <p>TLS Callback yönteminin popüler olmasının en büyük sebeplerinden birisi, <strong>entrypoint</strong> noktasına gelmeden önce çalışıyor olmasıdır. Yani zararlı aktörler, uygulamalarının ana amacı belli olmadan önce, programın başlangıcında TLS Callback yöntemi ile zararlı uygulamalarının debug edilip edilmediğini anlayabilmektedirler. Eski bir anti-debug tekniği olan TLS Callback, günümüzde kolaylıkla bypass edilebilmektedir.</p> <p>TLS Callback anti-debug tekniğini daha iyi anlamak adına uygulamasını yapalım.</p> <div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">#include &lt;iostream&gt;
+#include &lt;windows.h&gt;
+#pragma comment(lib, "ntdll.lib")
+#pragma section(".CRT$XLB", read) //.CRT$XLB adında yeni bir section oluşturduk. Section adının aynı olması gerekmektedir.
+#define NtCurrentProcess() (HANDLE)-1
+</span><span class="k">extern</span> <span class="s">"C"</span> <span class="n">NTSTATUS</span> <span class="n">NTAPI</span> <span class="nf">NtQueryInformationProcess</span><span class="p">(</span><span class="n">HANDLE</span> <span class="n">hProcess</span><span class="p">,</span> <span class="n">ULONG</span> <span class="n">InfoClass</span><span class="p">,</span> <span class="n">PVOID</span> <span class="n">Buffer</span><span class="p">,</span> <span class="n">ULONG</span> <span class="n">Length</span><span class="p">,</span> <span class="n">PULONG</span> <span class="n">ReturnLength</span><span class="p">);</span>
+<span class="cp">#ifdef _WIN64
+#pragma comment(linker, "/INCLUDE:_tls_used")
+#define readpeb (PBOOLEAN)__readgsdword(0x60) + 2 //PEB yapısında BeingDebugged'a işaret ediyor. x64 için
+#else
+#pragma comment(linker, "/INCLUDE:__tls_used")
+#define readpeb (PBOOLEAN)__readfsdword(0x30) + 2 //x32 için
+#endif
+</span><span class="kt">void</span> <span class="n">WINAPI</span> <span class="nf">DebuggerDetect</span><span class="p">(</span><span class="n">PVOID</span> <span class="n">handle</span><span class="p">,</span> <span class="n">DWORD</span> <span class="n">Reason</span><span class="p">,</span> <span class="n">PVOID</span> <span class="n">Reserved</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">PBOOLEAN</span> <span class="n">BeingDebugged</span> <span class="o">=</span> <span class="n">readpeb</span><span class="p">;</span>
+    <span class="n">HANDLE</span> <span class="n">DebugPort</span> <span class="o">=</span> <span class="nb">NULL</span><span class="p">;</span>
+    <span class="k">if</span> <span class="p">(</span><span class="o">*</span><span class="n">BeingDebugged</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">printf</span><span class="p">(</span><span class="s">"Debugger Detected!!!</span><span class="se">\n</span><span class="s">"</span><span class="p">);</span>
+    <span class="p">}</span>
+    <span class="k">else</span> <span class="p">{</span>
+        <span class="n">printf</span><span class="p">(</span><span class="s">"No debugger detected!</span><span class="se">\n</span><span class="s">"</span><span class="p">);</span>
+    <span class="p">}</span>
+    <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="n">NtQueryInformationProcess</span><span class="p">(</span><span class="n">NtCurrentProcess</span><span class="p">(),</span> <span class="mi">7</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">DebugPort</span><span class="p">,</span> <span class="k">sizeof</span><span class="p">(</span><span class="n">HANDLE</span><span class="p">),</span> <span class="nb">NULL</span><span class="p">))</span> <span class="p">{</span> 
+        <span class="c1">//DebugPort 0 değilse programın debug edildiğinin göstergesidir.</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">DebugPort</span><span class="p">)</span> <span class="p">{</span>
+            <span class="n">printf</span><span class="p">(</span><span class="s">"Debugger Detected via QueryInformationProcess!!!</span><span class="se">\n</span><span class="s">"</span><span class="p">);</span>
+            <span class="n">exit</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span>
+        <span class="p">}</span>
+        <span class="k">else</span> <span class="p">{</span>
+            <span class="n">printf</span><span class="p">(</span><span class="s">"No debugger detected for QueryInformationProcess</span><span class="se">\n</span><span class="s">"</span><span class="p">);</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+<span class="kr">__declspec</span><span class="p">(</span><span class="n">allocate</span><span class="p">(</span><span class="s">".CRT$XLB"</span><span class="p">))</span> <span class="n">PIMAGE_TLS_CALLBACK</span> <span class="n">CallbackAddress</span><span class="p">[]</span> <span class="o">=</span> <span class="p">{</span> <span class="n">DebuggerDetect</span><span class="p">,</span> <span class="nb">NULL</span> <span class="p">};</span>
+<span class="kt">int</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+    <span class="n">printf</span><span class="p">(</span><span class="s">"Hello, you're now in the entrypoint!"</span><span class="p">);</span>
+    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div> <p>Yukarıdaki implementesini yaptığımız TLS Callback ile anti-debug tekniğine bir göz atalım. <strong>NtQueryInformationProcess</strong> API’si ile de bir anti-debug tekniğini eklediğimiz örneğimizde pragma anahtar sözcükleri ile derleyicimize talimatlar vermekteyiz. Ntdll kütüphanesini dahil et, yeni bir section oluştur, linker’a belirtilenleri bağla gibi komutları zaten kodun içerisinde görmektesiniz. Buradaki en önemli noktalardan birisi <strong>__declspec</strong> anahtar sözcüğü ile tanım yaptığımız satırdır. Pragma anahtar sözcüğünde oluşturduğumuz section için yer ayırma yapıyoruz ve TLS Callback fonksiyonumuzun adresini veriyoruz. Daha sonra yazmış olduğumuz <strong>DebuggerDetect</strong> fonksiyonu çalışıyor ve bu fonksiyondan sonra <strong>main</strong>() fonksiyonumuz çalışıyor.</p> <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ntdll!_PEB
+   +0x000 InheritedAddressSpace : UChar
+   +0x001 ReadImageFileExecOptions : UChar
+   +0x002 BeingDebugged    : UChar
+   +0x003 BitField         : UChar
+   +0x003 ImageUsesLargePages : Pos 0, 1 Bit
+   +0x003 IsProtectedProcess : Pos 1, 1 Bit
+   +0x003 IsImageDynamicallyRelocated : Pos 2, 1 Bit
+   +0x003 SkipPatchingUser32Forwarders : Pos 3, 1 Bit
+   +0x003 IsPackagedProcess : Pos 4, 1 Bit
+   +0x003 IsAppContainer   : Pos 5, 1 Bit
+   +0x003 IsProtectedProcessLight : Pos 6, 1 Bit
+   +0x003 IsLongPathAwareProcess : Pos 7, 1 Bit
+   +0x004 Padding0         : [4] UChar
+   +0x008 Mutant           : Ptr64 Void
+   +0x010 ImageBaseAddress : Ptr64 Void
+   +0x018 Ldr              : Ptr64 _PEB_LDR_DATA
+   +0x020 ProcessParameters : Ptr64 _RTL_USER_PROCESS_PARAMETERS
+   +0x028 SubSystemData    : Ptr64 Void
+   +0x030 ProcessHeap      : Ptr64 Void
+   +0x038 FastPebLock      : Ptr64 _RTL_CRITICAL_SECTION
+   +0x040 AtlThunkSListPtr : Ptr64 _SLIST_HEADER
+   +0x048 IFEOKey          : Ptr64 Void
+   +0x050 CrossProcessFlags : Uint4B
+   +0x050 ProcessInJob     : Pos 0, 1 Bit
+   +0x050 ProcessInitializing : Pos 1, 1 Bit
+   +0x050 ProcessUsingVEH  : Pos 2, 1 Bit
+   +0x050 ProcessUsingVCH  : Pos 3, 1 Bit
+   +0x050 ProcessUsingFTH  : Pos 4, 1 Bit
+   +0x050 ProcessPreviouslyThrottled : Pos 5, 1 Bit
+   +0x050 ProcessCurrentlyThrottled : Pos 6, 1 Bit
+   +0x050 ReservedBits0    : Pos 7, 25 Bits
+   +0x054 Padding1         : [4] UChar
+   +0x058 KernelCallbackTable : Ptr64 Void
+   +0x058 UserSharedInfoPtr : Ptr64 Void
+   +0x060 SystemReserved   : Uint4B
+   +0x064 AtlThunkSListPtr32 : Uint4B
+   +0x068 ApiSetMap        : Ptr64 Void
+   +0x070 TlsExpansionCounter : Uint4B
+   +0x074 Padding2         : [4] UChar
+   +0x078 TlsBitmap        : Ptr64 Void
+   +0x080 TlsBitmapBits    : [2] Uint4B
+   +0x088 ReadOnlySharedMemoryBase : Ptr64 Void
+   +0x090 SharedData       : Ptr64 Void
+   +0x098 ReadOnlyStaticServerData : Ptr64 Ptr64 Void
+   +0x0a0 AnsiCodePageData : Ptr64 Void
+   +0x0a8 OemCodePageData  : Ptr64 Void
+   +0x0b0 UnicodeCaseTableData : Ptr64 Void
+   +0x0b8 NumberOfProcessors : Uint4B
+   +0x0bc NtGlobalFlag     : Uint4B
+   +0x0c0 CriticalSectionTimeout : _LARGE_INTEGER
+   +0x0c8 HeapSegmentReserve : Uint8B
+   +0x0d0 HeapSegmentCommit : Uint8B
+   +0x0d8 HeapDeCommitTotalFreeThreshold : Uint8B
+   +0x0e0 HeapDeCommitFreeBlockThreshold : Uint8B
+   +0x0e8 NumberOfHeaps    : Uint4B
+   +0x0ec MaximumNumberOfHeaps : Uint4B
+   +0x0f0 ProcessHeaps     : Ptr64 Ptr64 Void
+   +0x0f8 GdiSharedHandleTable : Ptr64 Void
+   +0x100 ProcessStarterHelper : Ptr64 Void
+   +0x108 GdiDCAttributeList : Uint4B
+   +0x10c Padding3         : [4] UChar
+   +0x110 LoaderLock       : Ptr64 _RTL_CRITICAL_SECTION
+   +0x118 OSMajorVersion   : Uint4B
+   +0x11c OSMinorVersion   : Uint4B
+   +0x120 OSBuildNumber    : Uint2B
+   +0x122 OSCSDVersion     : Uint2B
+   +0x124 OSPlatformId     : Uint4B
+   +0x128 ImageSubsystem   : Uint4B
+   +0x12c ImageSubsystemMajorVersion : Uint4B
+   +0x130 ImageSubsystemMinorVersion : Uint4B
+   +0x134 Padding4         : [4] UChar
+   +0x138 ActiveProcessAffinityMask : Uint8B
+   +0x140 GdiHandleBuffer  : [60] Uint4B
+   +0x230 PostProcessInitRoutine : Ptr64     void 
+   +0x238 TlsExpansionBitmap : Ptr64 Void
+   +0x240 TlsExpansionBitmapBits : [32] Uint4B
+   +0x2c0 SessionId        : Uint4B
+   +0x2c4 Padding5         : [4] UChar
+   +0x2c8 AppCompatFlags   : _ULARGE_INTEGER
+   +0x2d0 AppCompatFlagsUser : _ULARGE_INTEGER
+   +0x2d8 pShimData        : Ptr64 Void
+   +0x2e0 AppCompatInfo    : Ptr64 Void
+   +0x2e8 CSDVersion       : _UNICODE_STRING
+   +0x2f8 ActivationContextData : Ptr64 _ACTIVATION_CONTEXT_DATA
+   +0x300 ProcessAssemblyStorageMap : Ptr64 _ASSEMBLY_STORAGE_MAP
+   +0x308 SystemDefaultActivationContextData : Ptr64 _ACTIVATION_CONTEXT_DATA
+   +0x310 SystemAssemblyStorageMap : Ptr64 _ASSEMBLY_STORAGE_MAP
+   +0x318 MinimumStackCommit : Uint8B
+   +0x320 FlsCallback      : Ptr64 _FLS_CALLBACK_INFO
+   +0x328 FlsListHead      : _LIST_ENTRY
+   +0x338 FlsBitmap        : Ptr64 Void
+   +0x340 FlsBitmapBits    : [4] Uint4B
+   +0x350 FlsHighIndex     : Uint4B
+   +0x358 WerRegistrationData : Ptr64 Void
+   +0x360 WerShipAssertPtr : Ptr64 Void
+   +0x368 pUnused          : Ptr64 Void
+   +0x370 pImageHeaderHash : Ptr64 Void
+   +0x378 TracingFlags     : Uint4B
+   +0x378 HeapTracingEnabled : Pos 0, 1 Bit
+   +0x378 CritSecTracingEnabled : Pos 1, 1 Bit
+   +0x378 LibLoaderTracingEnabled : Pos 2, 1 Bit
+   +0x378 SpareTracingBits : Pos 3, 29 Bits
+   +0x37c Padding6         : [4] UChar
+   +0x380 CsrServerReadOnlySharedMemoryBase : Uint8B
+   +0x388 TppWorkerpListLock : Uint8B
+   +0x390 TppWorkerpList   : _LIST_ENTRY
+   +0x3a0 WaitOnAddressHashTable : [128] Ptr64 Void
+   +0x7a0 TelemetryCoverageHeader : Ptr64 Void
+   +0x7a8 CloudFileFlags   : Uint4B
+   +0x7ac CloudFileDiagFlags : Uint4B
+   +0x7b0 PlaceholderCompatibilityMode : Char
+   +0x7b1 PlaceholderCompatibilityModeReserved : [7] Char
+</code></pre></div></div> <p>x86 ve x64 mimari uyumlu olan implementemizde, öncelikle mimariye göre PEB yapısına erişmemiz gerekiyor. PEB yapısına eriştikten sonra yukarıdaki tabloda da görüldüğü üzere yapının 3. sıradaki değişkeni olan BeingDebugged’a erişim sağlamak adına 2. indexi belirtiyoruz.Eğer BeingDebugged 0’dan farklı bir değere sahip ise bu, programın debug edildiği anlamına gelmektedir. Ayrıca yukarıdaki kod parçasında mimariye göre PEB’in konumunun farklılık gösterdiği göz ardı edilmemelidir.</p> <p>PEB ile anti-debug tekniğinin ardından küçük bir ekleme daha yaparak anti-debug uygulamamızı biraz daha geliştiriyoruz. Windows API’larının sunduğu nimetlerden faydanalanarak, uygulamanını debug edilip edilmediğini anlayabilmekteyiz. Örnekte görüldüğü üzere <strong>NtQueryInformationProcess</strong> API’si ile benzer bir anti-debug tekniği kullanmış olduk. İlgili API, az önce bahsettiğimiz gibi kendisi mimariye göre PEB’in başlangıç noktasını bulur ve bizimle neredeyse aynı işlemleri yapar. <strong>ProcessInformationClass</strong> parametresine geçtiğimiz 7 değeri ile <strong>DebugPort</strong> değişkenine atama yapmaktayız. Eğer DebugPort değişkeni 0’dan farklı bir değere sahip ise programın debug edildiği anlaşılmaktadır.</p> <p><img src="/assets/img/tls-callback-eski-antidebug-teknigi/img/tls-callback-1.png" alt="TLS Callback Result" /></p> <p>Sizlere bu makalemde TLS’in genel olarak tanımı ve yapısı, TLS Callback ile debug tespiti ve PEB yapısına değinmiş olduk. Bir sonraki makalelerimde farklı anti-debug ve anti-reverse teknikleri ile karşınızda olacağım. Sağlıcakla kalın…</p> <h2 id="kaynakça"> <a href="#kaynakça" class="anchor-head"></a> Kaynakça </h2> <p>[1] https://en.wikipedia.org/wiki/Thread-local_storage</p> <p>[2] https://docs.microsoft.com/tr-tr/cpp/parallel/thread-local-storage-tls</p> <p>[3] https://docs.microsoft.com/en-us/windows/win32/procthread/thread-local-storage</p> <p>[4] http://rinseandrepeatanalysis.blogspot.com/p/peb-structure.html</p> </div> </article> <div class="comments"> <div id="disqus_thread"></div> <script type="text/javascript"> var disqus_shortname = 'fatihsensoy'; (function() { var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true; dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js'; (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq); })(); </script> <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript> </div> </main> <nav class="post-nav"> <a class="post-nav-item post-nav-prev" href="/perdenin-ardindakiler-0x01/" > <div class="nav-arrow">Previous</div> <span class="post-title">Perdenin Ardındakiler 0x01 - Android Zararlısını Işığa Kavuşturmak</span> </a> <a class="post-nav-item post-nav-next" href="/dlinjector-hizli-dll-enjeksiyonu/"> <div class="nav-arrow">Next</div> <span class="post-title">DLInjector – Hızlı DLL Enjeksiyon Aracı</span> </a> </nav> <footer class="footer"> <a class="footer_item" href="mailto:iletisim@fatihsensoy.com">Contact Me 📧</a> <a class="footer_item" href="/feed.xml">RSS</a> <small class="footer_copyright"> <span class="footer_item">Fatih Şensoy &copy;2021</span> </small> </footer> <script src="/assets/js/main.js" defer="defer"></script> <!-- Global site tag (gtag.js) - Google Analytics --> <script async src="https://www.googletagmanager.com/gtag/js?id=UA-155173124-1"></script> <script> window.dataLayer = window.dataLayer || []; function gtag(){dataLayer.push(arguments);} gtag('js', new Date()); gtag('config', 'UA-155173124-1'); </script> </div> </div> </body> </html>
