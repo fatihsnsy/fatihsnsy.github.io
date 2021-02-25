@@ -8,7 +8,7 @@ mode: dark # default theme "dark" | "light"
 
 #Pagination
 paginate: 5
-paginate_path: "_site/index.md"
+paginate_path: "/index.md"
 # toc settings
 toc:
   ordered_list: false
