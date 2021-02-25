@@ -70,3 +70,8 @@ If we talk about this example, I determine the meeting point as **25/02/2021 11:
 Dictionary based algorithm have sometimes collisions in this instance. Because our dictionary is very limited. If you would test this algorithm with large dictionary, you're probably will getting better result then me.
 
 Today, we talked about how DGA's work and what is this types from technical perspective. I'm waiting your thoughts in comment section. I wish you healthy lifes :) 
+
+## References 
+
+[1] https://en.wikipedia.org/wiki/Domain_generation_algorithm
+[2] https://zvelo.com/domain-generation-algorithms-dgas/
