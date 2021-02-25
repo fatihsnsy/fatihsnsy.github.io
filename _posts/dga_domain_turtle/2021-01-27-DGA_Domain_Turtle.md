@@ -74,4 +74,5 @@ Today, we talked about how DGA's work and what is this types from technical pers
 ## References 
 
 [1] https://en.wikipedia.org/wiki/Domain_generation_algorithm
+
 [2] https://zvelo.com/domain-generation-algorithms-dgas/
