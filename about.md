@@ -22,7 +22,7 @@ Ben Fatih ŞENSOY. 2000'li yılların başında gözümü açtığım bu dünyad
 - Kriptoloji  gibi eğitimler aldım.
 - Ve bu eğitimler sonucunda ise yolumu Malware Analizi ve Tersine Mühendislik alanlarında çizme kararına vardım.
 
-Şu anda hem liderliğini yürütmekte olduğum **Karaelmas ZAYOTEM** *(Zararlı Yazılım Önleme Ve Tersine Mühendislik Takımı)* ile güncel zararlı yazılımları analiz ediyor, analiz raporlarımızı devletin ilgili kurumlarına sunarak ulusal çapta önlem alınmasına yardımcı oluyor, projeler ortaya çıkartıyorum(z), hem de **Malwation Siber Güvenlik Teknolojileri**’nde Zararlı Yazılım Analisti ve Yazılım Geliştirici olarak çalışıyorum. Ayrıca CTF yarışmalarına katıldığımız ve içerisinde alt ekipler barındıran **Karaelmas Cyber Team**’in de bir üyesiyim. 
+Şu anda hem liderliğini yürütmekte olduğum **Karaelmas ZAYOTEM** *(Zararlı Yazılım Önleme Ve Tersine Mühendislik Takımı)* ile güncel zararlı yazılımları analiz ediyor, analiz raporlarımızı devletin ilgili kurumlarına sunarak ulusal çapta önlem alınmasına yardımcı oluyor, projeler ortaya çıkartıyorum(z). Ayrıca CTF yarışmalarına katıldığımız ve içerisinde alt ekipler barındıran **Karaelmas Cyber Team**’in de bir üyesiyim. 
 
 Kısa bir şekilde sizlere hayat hikayemi özetlemeye çalıştım. Daha fazla bilgiyi Anılar kategorisinde yapacağım paylaşımlarından bulabilirsiniz. Esenlikle kalın…
 
